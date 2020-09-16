@@ -1,0 +1,24 @@
+%section.content-header
+%section.content
+  .container-fluid
+    .row
+      .col-12
+        .card
+          .card-header
+            %h3.card-title Calendrier
+          .card-body
+            %table.table-bordered.text-center.absences-table
+              %thead
+                %tr
+                  %th.align-middle Agent
+                  - @date_range.each do |date|
+                    %th
+                      = date.day
+                      %br
+                      = wday_to_s date.wday
+              %tbody
+                - @agents.each do |agent|
+                  %tr
+                    %td.text-nowrap= agent.complete_name
+                    - @date_range.each do |date|
+                      %th.day{ class: date.wday.zero? ? 'sunday' : nil }
