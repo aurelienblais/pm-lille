@@ -1,0 +1,25 @@
+.login-box
+  .login-logo
+    %a
+      %b> PM
+      Lille
+  .card
+    .card-body.login-card-body
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .input-group.mb-3
+          = f.email_field :email, autofocus: true, class: 'form-control'
+          .input-group-append
+            .input-group-text
+              %span.fas.fa-envelope
+        .input-group.mb-3
+          = f.password_field :password, class: 'form-control'
+          .input-group-append
+            .input-group-text
+              %span.fas.fa-lock
+        .row
+          .col-8
+            .icheck-primary
+              = f.check_box :remember_me
+              = f.label :remember_me, 'Se souvenir de moi'
+          .col-4
+            = f.submit 'Connexion', class: 'btn btn-primary btn-block'
