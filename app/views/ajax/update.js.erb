@@ -1,0 +1,18 @@
+<% if item.persisted? %>
+  $('#edit-modal').modal('hide');
+  $(document).Toasts('create', {
+      title: '<%= controller_name.singularize.capitalize %> mis à jour avec succès',
+      autohide: true,
+      delay: 2500,
+      class: 'bg-success'
+  });
+  $('[data-item-id="<%= item.id %>"]').replaceWith('<%= escape_javascript render item %>');
+<% else %>
+  $(document).Toasts('create', {
+      title: 'Une erreur est survenue',
+      body: '<%= item.errors.full_messages.join(', ') %>',
+      autohide: true,
+      delay: 2500,
+      class: 'bg-danger'
+  });
+<% end %>

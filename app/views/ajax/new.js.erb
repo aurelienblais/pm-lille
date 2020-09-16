@@ -1,0 +1,6 @@
+$('body').append('<%= escape_javascript(render "#{controller_name.downcase}/new" ) %>');
+$('#new-modal').modal('show');
+$('#new-modal').on('hidden.bs.modal', () => $('#new-modal').remove());
+
+// Plugins init
+$('.color-picker').colorpicker();

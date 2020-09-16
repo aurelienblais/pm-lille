@@ -13,6 +13,7 @@ gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
 gem 'turbolinks', '~> 5'
 gem "haml-rails", "~> 2.0"
+gem 'decent_exposure'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 

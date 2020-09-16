@@ -1,0 +1,8 @@
+%tr{ data: { item_id: team.id } }
+  %td= team.id
+  %td= team.name
+  %td= team.agents.length
+  %td
+    .btn-group
+      = link_to team, method: :delete, remote: true, class: 'btn btn-danger btn-sm', data: { confirm: 'Voulez-vous vraiment supprimer cette équipe ?' } do
+        %i.fas.fa-trash

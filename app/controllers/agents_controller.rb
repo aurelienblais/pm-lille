@@ -1,10 +1,31 @@
 class AgentsController < ApplicationController
+  expose :items, -> { Agent.eager_load(:team).order_by_name }
+  expose :item, model: Agent, build_params: :agent_params
+
   def index
-    @agents = Agent.order_by_name
+  end
+
+  def new
+    render 'ajax/new'
   end
 
   def create
-    @agent = Agent.create(agent_params)
+    item.save!
+    render 'ajax/create'
+  end
+
+  def edit
+    render 'ajax/edit'
+  end
+
+  def update
+    item.update agent_params
+    render 'ajax/update'
+  end
+
+  def destroy
+    item.destroy!
+    render 'ajax/destroy'
   end
 
   private
@@ -16,7 +37,9 @@ class AgentsController < ApplicationController
         :register_number,
         :birthday,
         :arrival_date,
-        :departure_date
+        :departure_date,
+        :team_id,
+        :rank_id
     )
   end
 end

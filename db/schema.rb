@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_29_110647) do
+ActiveRecord::Schema.define(version: 2020_09_16_143112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "absence_types", force: :cascade do |t|
+    t.string "name"
+    t.string "color"
+  end
 
   create_table "agents", force: :cascade do |t|
     t.string "first_name"
@@ -22,6 +27,18 @@ ActiveRecord::Schema.define(version: 2020_07_29_110647) do
     t.date "birthday"
     t.date "arrival_date"
     t.date "departure_date"
+    t.bigint "team_id"
+    t.bigint "rank_id"
+    t.index ["rank_id"], name: "index_agents_on_rank_id"
+    t.index ["team_id"], name: "index_agents_on_team_id"
+  end
+
+  create_table "ranks", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "users", force: :cascade do |t|

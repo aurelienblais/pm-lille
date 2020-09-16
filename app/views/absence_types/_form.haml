@@ -1,0 +1,12 @@
+= form_for item, remote: true do |f|
+  .modal-body
+    .row
+      .col-12
+        .form-group
+          = f.label :name, 'Nom'
+          = f.text_field :name, class: 'form-control', required: true
+        .form-group
+          = f.label :color, 'Couleur'
+          = f.text_field :color, class: 'form-control color-picker', required: true
+  .modal-footer.justify-content-between
+    = f.submit 'Enregistrer', class: 'btn btn-primary'
