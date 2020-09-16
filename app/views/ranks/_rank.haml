@@ -1,0 +1,8 @@
+%tr{ data: { item_id: rank.id } }
+  %td= rank.id
+  %td= rank.name
+  %td= rank.agents.length
+  %td
+    .btn-group
+      = link_to rank, method: :delete, remote: true, class: 'btn btn-danger btn-sm', data: { confirm: 'Voulez-vous vraiment supprimer ce grade ?' } do
+        %i.fas.fa-trash

@@ -1,0 +1,12 @@
+%tr{ data: { item_id: absence_type.id } }
+  %td= absence_type.id
+  %td= absence_type.name
+  %td
+    = absence_type.color
+    .color-display{ style: "background-color: #{absence_type.color}" }
+  %td
+    .btn-group
+      = link_to edit_absence_type_path(absence_type), remote: true, class: 'btn btn-default btn-sm'do
+        %i.fas.fa-edit
+      = link_to absence_type, method: :delete, remote: true, class: 'btn btn-danger btn-sm', data: { confirm: 'Voulez-vous vraiment supprimer cet agent ?' } do
+        %i.fas.fa-trash

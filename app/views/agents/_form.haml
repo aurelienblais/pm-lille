@@ -1,0 +1,31 @@
+= form_for item, remote: true do |f|
+  .modal-body
+    .row
+      .col-6
+        .form-group
+          = f.label :last_name, 'Nom'
+          = f.text_field :last_name, class: 'form-control', required: true
+        .form-group
+          = f.label :first_name, 'Prénom'
+          = f.text_field :first_name, class: 'form-control', required: true
+        .form-group
+          = f.label :register_number, 'Matricule'
+          = f.text_field :register_number, class: 'form-control', required: true
+        .form-group
+          = f.label :birthday, 'Anniversaire'
+          = f.date_field :birthday, class: 'form-control'
+      .col-6
+        .form-group
+          = f.label :arrival_date, 'Date d\'arrivée'
+          = f.date_field :arrival_date, class: 'form-control'
+        .form-group
+          = f.label :departure_date, 'Date de départ'
+          = f.date_field :departure_date, class: 'form-control'
+        .form-group
+          = f.label :team_id, 'Equipe'
+          = f.select :team_id, options_from_collection_for_select(Team.order_by_name, :id, :name), {}, { class: 'form-control' }
+        .form-group
+          = f.label :rank_id, 'Grade'
+          = f.select :rank_id, options_from_collection_for_select(Rank.order_by_name, :id, :name), {}, { class: 'form-control' }
+  .modal-footer.justify-content-between
+    = f.submit 'Enregistrer', class: 'btn btn-primary'

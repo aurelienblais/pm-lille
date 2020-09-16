@@ -1,0 +1,16 @@
+.modal#new-modal
+  .modal-dialog
+    .modal-content
+      = form_for item, remote: true do |f|
+        .modal-header
+          %h4.modal-title Nouvelle équipe
+          %button.close{type: :button, data: { dismiss: :modal }}
+            %span ×
+        .modal-body
+          .row
+            .col-12
+              .form-group
+                = f.label :name, 'Nom'
+                = f.text_field :name, class: 'form-control', required: true
+        .modal-footer.justify-content-between
+          = f.submit 'Enregistrer', class: 'btn btn-primary'

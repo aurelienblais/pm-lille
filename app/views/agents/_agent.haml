@@ -1,0 +1,15 @@
+%tr{ data: { item_id: agent.id } }
+  %td= agent.id
+  %td= agent.complete_name
+  %td= agent.register_number
+  %td
+    = agent.birthday.strftime '%d-%m-%Y'
+    = "(#{agent.age} ans)"
+  %td= agent.team
+  %td= agent.rank
+  %td
+    .btn-group
+      = link_to edit_agent_path(agent), remote: true, class: 'btn btn-default btn-sm'do
+        %i.fas.fa-edit
+      = link_to agent, method: :delete, remote: true, class: 'btn btn-danger btn-sm', data: { confirm: 'Voulez-vous vraiment supprimer cet agent ?' } do
+        %i.fas.fa-trash

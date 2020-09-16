@@ -5,19 +5,16 @@
       .col-12
         .card
           .card-header
-            %h3.card-title Agents
+            %h3.card-title Equipes
             .card-tools
-              = link_to new_agent_path, remote: true, class: 'btn btn-sm btn-secondary' do
-                Nouvel agent
+              = link_to new_team_path, remote: true, class: 'btn btn-sm btn-secondary' do
+                Nouvelle équipe
           .card-body
             %table.table.table-bordered.table-hover.text-center#items-table
               %thead
                 %tr
                   %th #
                   %th Nom
-                  %th Matricule
-                  %th Date de naissance
-                  %th Equipe
-                  %th Grade
+                  %th Nombre d'agents
                   %th
               %tbody= render items
