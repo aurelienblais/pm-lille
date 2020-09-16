@@ -1,2 +1,2 @@
 web: rails s -p 3000
-webpacker: webpack-dev-server
+webpacker: bin/webpack-dev-server

@@ -1,0 +1,3 @@
+$('body').append('<%= escape_javascript(render 'agents/new') %>');
+$('#new-modal').modal('show');
+$('#new-modal').on('hidden.bs.modal', () => $('#new-modal').remove());
