@@ -24,3 +24,22 @@
   height: 16px;
   display: inline-block;
 }
+
+.absences-table {
+  margin: 0 auto;
+  thead th:first-child {
+    min-width: 10vw;
+  }
+
+  thead th:not(:first-child) {
+    min-width: 2.2vw;
+  }
+
+  tbody tr {
+    min-height: 2.2vw;
+
+    .sunday {
+      background-color: #999999;
+    }
+  }
+}
