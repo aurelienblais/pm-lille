@@ -4,6 +4,7 @@
   %td
     = absence_type.color
     .color-display{ style: "background-color: #{absence_type.color}" }
+  %td= absence_type.leave_balance
   %td
     .btn-group
       = link_to edit_absence_type_path(absence_type), remote: true, class: 'btn btn-default btn-sm'do

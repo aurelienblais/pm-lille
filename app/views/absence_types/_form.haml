@@ -8,5 +8,8 @@
         .form-group
           = f.label :color, 'Couleur'
           = f.text_field :color, class: 'form-control color-picker', required: true
+        .form-group
+          = f.label :leave_balance, 'Congés payés à déduire'
+          = f.number_field :leave_balance, class: 'form-control', required: true, step: 0.5
   .modal-footer.justify-content-between
     = f.submit 'Enregistrer', class: 'btn btn-primary'

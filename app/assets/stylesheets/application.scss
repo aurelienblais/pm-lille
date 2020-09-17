@@ -25,16 +25,29 @@
   height: 12px;
   display: inline-block;
   border: 1px solid #EFEFEF;
+  color: #fff;
+  text-shadow: 1px 1px rgba(0,0,0,0.5);
+  text-align: center;
+
+  &.xl {
+    width: 32px;
+    height: 32px;
+    line-height: 28px;
+  }
+}
+
+.color-name {
+  display: inline-block;
 }
 
 .absences-table {
   margin: 0 auto;
 
-  thead th:first-child {
+  thead th.agent-name {
     min-width: 10vw;
   }
 
-  thead th:not(:first-child) {
+  thead th {
     min-width: 2.2vw;
   }
 
@@ -45,6 +58,8 @@
 
       .day {
         cursor: pointer;
+        position: relative;
+        opacity: 0.8;
         background: #DADADA;
 
         .day-background {
@@ -61,11 +76,26 @@
           );
         }
 
+        .day-number {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          color: white;
+          text-shadow: 1px 1px rgba(0,0,0,0.5);
+          line-height: 2.2vw;
+        }
+
         &.active {
           opacity: 0.6;
           .day-background {
             opacity: 0.4;
           }
+        }
+
+        &.disabled {
+          cursor: initial;
         }
       }
 

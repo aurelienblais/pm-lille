@@ -14,6 +14,9 @@
         .form-group
           = f.label :birthday, 'Anniversaire'
           = f.date_field :birthday, class: 'form-control'
+        .form-group
+          = f.label :leave_balance, 'Solde de congés annuel'
+          = f.number_field :leave_balance, class: 'form-control', required: true
       .col-6
         .form-group
           = f.label :arrival_date, 'Date d\'arrivée'
