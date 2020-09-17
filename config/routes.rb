@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   resources :teams
   resources :ranks
   resources :absence_types
+  resources :absences, only: [:create]
   root 'dashboard#index'
 end

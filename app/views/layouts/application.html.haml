@@ -8,7 +8,7 @@
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     %script{src: "https://kit.fontawesome.com/6d90f39943.js"}
-  %body.sidebar-mini
+  %body.sidebar-mini.layout-fixed
     .wrapper
       = render partial: "layouts/header"
       = render partial: "layouts/sidebar"

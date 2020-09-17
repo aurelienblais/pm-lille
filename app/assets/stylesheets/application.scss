@@ -15,18 +15,21 @@
  *= require bootstrap
  *= require admin-lte/dist/css/adminlte
  *= require bootstrap-colorpicker/dist/css/bootstrap-colorpicker
+ *= require bootstrap-daterangepicker/daterangepicker
  */
 
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&lang=en");
 
 .color-display {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   display: inline-block;
+  border: 1px solid #EFEFEF;
 }
 
 .absences-table {
   margin: 0 auto;
+
   thead th:first-child {
     min-width: 10vw;
   }
@@ -35,11 +38,67 @@
     min-width: 2.2vw;
   }
 
-  tbody tr {
-    min-height: 2.2vw;
+  tbody {
+    tr {
+      min-height: 2.2vw;
+      height: 2.2vw;
 
-    .sunday {
-      background-color: #999999;
+      .day {
+        cursor: pointer;
+        background: #DADADA;
+
+        .day-background {
+          width: 2.2vw;
+          height: 2.2vw;
+          position: sticky;
+          opacity: 0;
+          background: repeating-linear-gradient(
+                          -55deg,
+                          #222,
+                          #222 10px,
+                          #333 10px,
+                          #333 20px
+          );
+        }
+
+        &.active {
+          opacity: 0.6;
+          .day-background {
+            opacity: 0.4;
+          }
+        }
+      }
+
+      .sunday {
+        background-color: #999999;
+      }
+    }
+  }
+}
+
+.event-picker {
+  position: fixed !important;
+  width: 20vw;
+  right: 1vw;
+  margin-bottom: 0 !important;
+  bottom: 0;
+
+  .card-title {
+    line-height: 31px;
+  }
+
+  .card-body {
+    padding: 0 !important;
+
+    .event-picker-body {
+      margin: 1rem;
+    }
+    
+    .event-container {
+      cursor: pointer;
+      .event-name {
+        display: inline-block;
+      }
     }
   }
 }

@@ -2,8 +2,7 @@ class TeamsController < ApplicationController
   expose :items, -> { Team.eager_load(:agents).order_by_name }
   expose :item, model: Team, build_params: :team_params
 
-  def index
-  end
+  def index; end
 
   def new
     render 'ajax/new'
@@ -23,7 +22,7 @@ class TeamsController < ApplicationController
 
   def team_params
     params.require(:team).permit(
-        :name
+      :name
     )
   end
 end

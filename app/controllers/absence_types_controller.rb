@@ -2,8 +2,7 @@ class AbsenceTypesController < ApplicationController
   expose :items, -> { AbsenceType.order_by_name }
   expose :item, model: AbsenceType, build_params: :absence_type_params
 
-  def index
-  end
+  def index; end
 
   def new
     render 'ajax/new'
@@ -32,8 +31,8 @@ class AbsenceTypesController < ApplicationController
 
   def absence_type_params
     params.require(:absence_type).permit(
-        :name,
-        :color
+      :name,
+      :color
     )
   end
 end

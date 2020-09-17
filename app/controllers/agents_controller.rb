@@ -1,9 +1,8 @@
 class AgentsController < ApplicationController
-  expose :items, -> { Agent.eager_load(:team).order_by_name }
+  expose :items, -> { Agent.eager_load(:team).order_by_name.page params[:page] }
   expose :item, model: Agent, build_params: :agent_params
 
-  def index
-  end
+  def index; end
 
   def new
     render 'ajax/new'
@@ -32,14 +31,14 @@ class AgentsController < ApplicationController
 
   def agent_params
     params.require(:agent).permit(
-        :first_name,
-        :last_name,
-        :register_number,
-        :birthday,
-        :arrival_date,
-        :departure_date,
-        :team_id,
-        :rank_id
+      :first_name,
+      :last_name,
+      :register_number,
+      :birthday,
+      :arrival_date,
+      :departure_date,
+      :team_id,
+      :rank_id
     )
   end
 end
