@@ -1,6 +1,7 @@
 class Agent < ApplicationRecord
   belongs_to :team
   belongs_to :rank
+  has_many :absences
 
   scope :order_by_name, -> { order(:last_name).order(:first_name) }
 
