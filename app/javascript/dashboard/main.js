@@ -1,6 +1,6 @@
 selectedDays = {};
 
-$(document).on('click', '.day', (e) => {
+$(document).on('click', '.day:not(.disabled)', (e) => {
     const $element = $(e.target).closest('.day');
 
     $element.toggleClass('active');
@@ -69,12 +69,21 @@ setEvent = (eventId, eventName, color) => {
 }
 
 $(document).on('turbolinks:load', () => {
-   if (ABSENCES) {
+   if (typeof ABSENCES !== 'undefined') {
        ABSENCES.forEach((absence) => {
           absence = JSON.parse(absence);
            $('[data-agent="' + absence.agent_id + '"][data-date="' + absence.date + '"]')
                .css('background', absence.absence_type.color)
                .attr('title', absence.absence_type.name);
+       });
+
+       total = ABSENCES.reduce(function(rv, x) {
+           x = JSON.parse(x);
+           rv[x.absence_type.id] = 1 + (rv[x.absence_type.id] || 0);
+           return rv;
+       }, {});
+       Object.keys(total).forEach((eventId) => {
+          $("[data-event-type='" + eventId + "']").text(total[eventId]);
        });
    }
 

@@ -1,0 +1,64 @@
+%section.content-header
+%section.content
+  .container-fluid
+    .row
+      .col-4
+        .card
+          .card-header
+            %h3.card-title= item.complete_name
+            .card-tools{ style: 'width: 15vw;' }
+              = form_tag agent_url(item), method: :get, class: 'dashboard-form' do
+                = text_field_tag :dates, "#{display_date @date_range.first} - #{display_date @date_range.last}", class: 'form-control dashboard-date'
+          .card-body
+            %table.table-bordered.text-center.absences-table
+              %thead
+                %tr
+                  %th L
+                  %th M
+                  %th M
+                  %th J
+                  %th V
+                  %th S
+                  %th D
+              %tbody
+                - range = @date_range.to_a
+                - @date_range.first.wday.times.each { range.unshift 0 }
+                - range.each_slice(7) do |dates|
+                  %tr
+                    - dates.each do |date|
+                      - if date.kind_of? Integer
+                        %th
+                      - else
+                        %th.day.disabled{ class: date.wday == 6 ? 'sunday' : nil, data: { date: date, agent: item.id, toggle: :tooltip } }
+                          %span.day-number= date.day
+                          .day-background
+      .col-4
+        .card
+          .card-header
+            %h3.card-title= "Période du #{display_date @date_range.first} au #{display_date @date_range.last}"
+          .card-body
+            .row
+              - @absence_types.each do |absence_type|
+                .col-6.event-container
+                  .color-display.xl{ style: "background-color: #{absence_type.color}", data: { event_type: absence_type.id } } 0
+                  .color-name= absence_type.name
+      .col-4
+        .card
+          .card-header
+            %h3.card-title= "Récapitulatif #{@date_range.first.year}"
+          .card-body
+            %table.table.table-bordered.text-center
+              %tr
+                %th Congés par an
+                %th= item.leave_balance
+              %tr
+                %th Congés pris
+                %th= @leave_taken
+              %tr
+                %th= "Report congés #{@date_range.first.year - 1}"
+                %th= item.leave_balance - @leave_outstanding
+              %tr.bg-secondary
+                %th Solde disponible
+                %th= item.leave_balance - @leave_taken + (item.leave_balance - @leave_outstanding)
+:javascript
+  ABSENCES = #{ raw @absences.map(&:to_json) }

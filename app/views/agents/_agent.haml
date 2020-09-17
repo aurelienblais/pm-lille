@@ -9,6 +9,8 @@
   %td= agent.rank
   %td
     .btn-group
+      = link_to agent, class: 'btn btn-info btn-sm' do
+        %i.fas.fa-eye
       = link_to edit_agent_path(agent), remote: true, class: 'btn btn-default btn-sm'do
         %i.fas.fa-edit
       = link_to agent, method: :delete, remote: true, class: 'btn btn-danger btn-sm', data: { confirm: 'Voulez-vous vraiment supprimer cet agent ?' } do
