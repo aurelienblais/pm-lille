@@ -1,0 +1,18 @@
+// Place all the styles related to the Rooms controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.direct-chat-messages {
+  height: 50vh !important;
+}
+
+.direct-chat-contacts {
+  transform: none !important;
+  left: 0;
+  top: 3.5rem !important;
+  height: calc(100% - 7rem) !important;
+
+  .contacts-list-info {
+    margin-top: 8px !important;
+  }
+}

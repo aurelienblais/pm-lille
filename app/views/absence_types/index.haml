@@ -10,7 +10,7 @@
               = link_to new_absence_type_path, remote: true, class: 'btn btn-sm btn-secondary' do
                 Nouveau type d'absence
           .card-body
-            %table.table.table-bordered.table-hover.text-center#items-table
+            %table.table.table-bordered.table-hover.text-center
               %thead
                 %tr
                   %th #
@@ -18,4 +18,4 @@
                   %th Couleur
                   %th Congés déduits
                   %th
-              %tbody= render items
+              %tbody#items-table= render items

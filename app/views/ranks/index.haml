@@ -10,11 +10,11 @@
               = link_to new_rank_path, remote: true, class: 'btn btn-sm btn-secondary' do
                 Nouveau grade
           .card-body
-            %table.table.table-bordered.table-hover.text-center#items-table
+            %table.table.table-bordered.table-hover.text-center
               %thead
                 %tr
                   %th #
                   %th Nom
                   %th Nombre d'agents
                   %th
-              %tbody= render items
+              %tbody#items-table= render items

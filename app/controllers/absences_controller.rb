@@ -17,9 +17,9 @@ class AbsencesController < ApplicationController
 
   def absence_params
     params.require(:absence).permit(
-        :agent_id,
-        :absence_type_id,
-        :date
+      :agent_id,
+      :absence_type_id,
+      :date
     )
   end
 end

@@ -1,0 +1,37 @@
+%section.content-header
+%section.content
+  .container-fluid
+    .row
+      .col-4= render 'nav'
+      .col-8
+        .card
+          .card-header
+            %h3.card-title= item.name
+            .card-tools
+              %button.btn.btn-tool{ data: { toggle: :collapse }, href: '.direct-chat-contacts' }
+                Utilisateurs
+              - unless ENV.fetch('DEFAULT_ROOM_ID', Room.first.id).to_i == item.id
+                = link_to new_room_user_path(room_id: item.id), remote: true, class: 'btn btn-sm btn-secondary' do
+                  Ajouter un utilisateur
+          .card-body
+            .direct-chat-messages{ data: { channel_subscribe: :room, room_id: item.id } }= render @room_messages
+            .direct-chat-contacts.collapse
+              %ul.contacts-list= render item.room_users
+          .card-footer
+            = form_for @room_message, remote: true do |f|
+              .input-group
+                = f.hidden_field :room_id
+                = f.text_field :message, class: 'form-control', id: 'room-message-input', required: true
+                .input-group-append
+                  = f.button type: :submit, class: 'btn btn-sm btn-default' do
+                    %i.fas.fa-paper-plane
+
+.direct-chat-msg.d-none{ data: { role: 'message-template' } }
+  .direct-chat-infos.clearfix
+    %span.direct-chat-name.float-left
+    %span.direct-chat-timestamp.float-right
+  %img.direct-chat-img
+  .direct-chat-text
+
+:javascript
+  currentRoom = #{item.id}

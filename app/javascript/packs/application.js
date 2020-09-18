@@ -19,6 +19,7 @@ require('moment');
 
 require('bootstrap-colorpicker');
 require('bootstrap-daterangepicker');
+require('bootstrap-datepicker');
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
@@ -31,6 +32,11 @@ require('dashboard/main');
 
 $(document).on('turbolinks:load', () => {
     $('[data-toggle="tooltip"]').tooltip();
+    $(".year-picker").datepicker({
+        format: "yyyy",
+        viewMode: "years",
+        minViewMode: "years"
+    });
     $('input[name="dates"]').daterangepicker({
         maxSpan: {
             days: 31

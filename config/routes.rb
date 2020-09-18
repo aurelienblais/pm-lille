@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :room_messages, only: [:create]
+  resources :room_users, only: [:create, :new]
+  resources :rooms
   devise_for :users
 
   resources :agents

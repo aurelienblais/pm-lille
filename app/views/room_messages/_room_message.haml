@@ -1,0 +1,6 @@
+.direct-chat-msg{ class: room_message.get_user == current_user ? nil : 'right' }
+  .direct-chat-infos.clearfix
+    %span.direct-chat-name.float-left= room_message.get_user.complete_name
+    %span.direct-chat-timestamp.float-right= display_datetime room_message.created_at
+  %img.direct-chat-img{ src: room_message.get_user.gravatar_url }/
+  .direct-chat-text= room_message.message

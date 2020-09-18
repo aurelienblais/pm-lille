@@ -1,0 +1,8 @@
+.modal#new-modal
+  .modal-dialog.modal-xl
+    .modal-content
+      .modal-header
+        %h4.modal-title Nouvelle salle de discussion
+        %button.close{type: :button, data: { dismiss: :modal }}
+          %span ×
+      = render 'form'

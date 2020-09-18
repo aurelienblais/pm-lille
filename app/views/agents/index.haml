@@ -10,7 +10,7 @@
               = link_to new_agent_path, remote: true, class: 'btn btn-sm btn-secondary' do
                 Nouvel agent
           .card-body
-            %table.table.table-bordered.table-hover.text-center#items-table
+            %table.table.table-bordered.table-hover.text-center
               %thead
                 %tr
                   %th #
@@ -20,6 +20,6 @@
                   %th Equipe
                   %th Grade
                   %th
-              %tbody= render items
+              %tbody#items-table= render items
           .card-footer
             = paginate items

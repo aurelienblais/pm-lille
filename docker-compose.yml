@@ -1,6 +1,5 @@
 version: '3.4'
 services:
-
   postgres:
     image: postgres:10.0
     container_name: pm-lille_postgres
@@ -15,3 +14,8 @@ services:
       interval: 5s
       timeout: 10s
       retries: 12
+  redis:
+    image: "redis:alpine"
+    hostname: redis
+    ports:
+      - "6379:6379"

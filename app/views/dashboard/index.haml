@@ -6,30 +6,15 @@
         .card
           .card-header
             %h3.card-title Calendrier
-            .card-tools{ style: 'width: 15vw;' }
+            .card-tools{ style: 'width: 30vw;' }
               = form_tag root_path, method: :get, class: 'dashboard-form' do
-                = text_field_tag :dates, "#{@date_range.first.strftime('%d-%m-%Y')} - #{@date_range.last.strftime('%d-%m-%Y')}", class: 'form-control dashboard-date'
+                .row
+                  .col-6= select_tag :team_id, options_from_collection_for_select(@teams, :id, :name, params[:team_id]), class: 'form-control dashboard-team', include_blank: 'Toutes'
+                  .col-6= text_field_tag :dates, "#{@date_range.first.strftime('%d-%m-%Y')} - #{@date_range.last.strftime('%d-%m-%Y')}", class: 'form-control dashboard-date'
 
-          .card-body
-            %table.table-bordered.text-center.absences-table
-              %thead
-                %tr
-                  %th.align-middle Agent
-                  - @date_range.each do |date|
-                    %th
-                      = date.day
-                      %br
-                      = wday_to_s date.wday
-              %tbody
-                - @agents.each do |agent|
-                  %tr
-                    %td.text-nowrap
-                      = link_to agent do
-                        = "[#{agent.register_number}]"
-                        = agent.complete_name
-                    - @date_range.each do |date|
-                      %th.day{ class: date.wday == 6 ? 'sunday' : nil, data: { date: date, agent: agent.id, toggle: :tooltip } }
-                        .day-background
+          .card-body.w-100
+            - @agents.group_by(&:team_id).each do |team, agents|
+              = render 'team_table', agents: agents
 
 .card.event-picker{ style: 'display: none;' }
   .card-header
