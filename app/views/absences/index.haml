@@ -1,0 +1,36 @@
+%section.content-header
+%section.content
+  .container-fluid
+    .row
+      .col-12
+        .card
+          .card-header
+            %h3.card-title Calendrier
+            .card-tools{ style: 'width: 30vw;' }
+              = form_tag root_path, method: :get, class: 'dashboard-form' do
+                .row
+                  .col-6= select_tag :team_id, options_from_collection_for_select(@teams, :id, :name, params[:team_id]), class: 'form-control dashboard-team', include_blank: 'Toutes'
+                  .col-6= text_field_tag :dates, "#{@date_range.first.strftime('%d-%m-%Y')} - #{@date_range.last.strftime('%d-%m-%Y')}", class: 'form-control dashboard-date'
+
+          .card-body.w-100
+            - @agents.group_by(&:team_id).each do |team, agents|
+              = render 'team_table', agents: agents
+
+.card.event-picker{ style: 'display: none;' }
+  .card-header
+    %h3.card-title Assigner un événement
+    .card-tools
+      %btn.btn.btn-sm.float-right{ data: { toggle: :collapse }, href: '.event-picker-body' }
+        %i.fas.fa-angle-up
+  .card-body
+    .row.event-picker-body.collapse
+      .col-6.event-container{ data: { event: 0, color: '' } }
+        .color-display{ style: 'background-color: #fff' }
+        .event-name Aucune
+      - @absence_types.each do |absence_type|
+        .col-6.event-container{ data: { event: absence_type.id, color: absence_type.color, name: absence_type.name } }
+          .color-display{ style: "background-color: #{absence_type.color}" }
+          .event-name= absence_type.name
+
+:javascript
+  ABSENCES = #{ raw @absences.map(&:to_json) }

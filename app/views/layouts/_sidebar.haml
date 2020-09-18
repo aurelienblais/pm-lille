@@ -15,6 +15,10 @@
         %ul.nav.nav-sidebar.flex-column
           %li.nav-item
             = link_to root_path, class: 'nav-link' do
+              %i.fas.fa-chart-line.nav-icon
+              %p Accueil
+          %li.nav-item
+            = link_to absences_path, class: 'nav-link' do
               %i.far.fa-calendar.nav-icon
               %p Calendrier
           - if policy(Room).index?

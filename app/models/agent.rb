@@ -6,7 +6,8 @@ class Agent < ApplicationRecord
   has_many :absences
 
   scope :order_by_name, -> { order(:last_name).order(:first_name) }
-  scope :belong_to_team, ->(team) { where(team_id: team) }
+  scope :belong_to_team, -> (team) { where(team_id: team) }
+  scope :birthdays_in_range, -> (range) { where(birthday: range).order(:birthday) }
 
   def complete_name
     "#{first_name} #{last_name}"

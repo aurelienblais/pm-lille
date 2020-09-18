@@ -1,9 +1,10 @@
-%tr{ data: { item_id: user.id } }
-  %td= user.id
-  %td= user.complete_name
-  %td= user.role
-  %td= user.teams.join(', ')
-  %td
-    .btn-group
-      = link_to edit_user_path(user), remote: true, class: 'btn btn-default btn-sm'do
-        %i.fas.fa-edit
+- unless user.superadmin?
+  %tr{ data: { item_id: user.id } }
+    %td= user.id
+    %td= user.complete_name
+    %td= user.role
+    %td= user.teams.join(', ')
+    %td
+      .btn-group
+        = link_to edit_user_path(user), remote: true, class: 'btn btn-default btn-sm'do
+          %i.fas.fa-edit

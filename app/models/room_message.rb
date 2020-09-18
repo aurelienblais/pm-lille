@@ -5,6 +5,8 @@ class RoomMessage < ApplicationRecord
   belongs_to :room, inverse_of: :room_messages
 
   scope :for_user, ->(user) { includes(room: { room_users: :user }).where(room: { room_users: { user: user } }) }
+  scope :for_room, ->(room_id) { where(room_id: room_id) }
+  scope :latest, ->(count) { order(created_at: :desc).limit(count) }
 
   def get_user
     return user if user
