@@ -1,4 +1,5 @@
-%li
-  %img.contacts-list-img{ src: room_user.user.gravatar_url }
-  .contacts-list-info
-    .contacts-list-name= room_user.user.complete_name
+- unless room_user.user.disabled? || room_user.user.superadmin?
+  %li
+    %img.contacts-list-img{ src: room_user.user.gravatar_url }
+    .contacts-list-info
+      .contacts-list-name= room_user.user.complete_name
