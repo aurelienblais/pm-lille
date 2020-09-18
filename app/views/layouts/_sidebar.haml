@@ -8,9 +8,10 @@
     .sidebar{:style => "min-height: 652px; overflow: hidden; width: auto; height: 652px;"}
       .user-panel.mt-3.pb-3.mb-3.d-flex
         .info
-          %a.d-block
+          = link_to edit_registration_path(current_user), class: 'd-block' do
             Bonjour
             %b= current_user.complete_name
+            %i.fas.fa-cog
       %nav.mt-2
         %ul.nav.nav-sidebar.flex-column
           %li.nav-item
