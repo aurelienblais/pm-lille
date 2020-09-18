@@ -15,3 +15,6 @@
       .content-wrapper
         = yield
       = render partial: "layouts/footer"
+
+:javascript
+  userId = #{current_user.id || -1}

@@ -1,0 +1,11 @@
+<% if item.persisted? %>
+$('#room-message-input').val('');
+<% else %>
+$(document).Toasts('create', {
+    title: 'Une erreur est survenue',
+    body: '<%= item.errors.full_messages.join(', ') %>',
+    autohide: true,
+    delay: 2500,
+    class: 'bg-danger'
+});
+<% end %>

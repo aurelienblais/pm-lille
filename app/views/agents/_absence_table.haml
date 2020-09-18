@@ -1,0 +1,25 @@
+.card
+  .card-header
+    %h3.card-title= month_to_s date_range[0].month
+  .card-body
+    %table.text-center.absences-table
+      %thead
+        %tr
+          %th L
+          %th M
+          %th M
+          %th J
+          %th V
+          %th S
+          %th D
+      %tbody
+        - date_range[0].wday.times.each { date_range.unshift 0 }
+        - date_range.each_slice(7) do |dates|
+          %tr
+            - dates.each do |date|
+              - if date.kind_of? Integer
+                %td
+              - else
+                %td.day{ class: date.wday == 6 ? 'sunday' : nil, data: { date: date, agent: item.id, toggle: :tooltip } }
+                  %span.day-number= date.day
+                  .day-background

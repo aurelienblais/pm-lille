@@ -1,0 +1,13 @@
+= form_for item, remote: true do |f|
+  .modal-body
+    .row
+      .col-12
+        .form-group
+          = f.label :room_id, 'Salle'
+          = text_field_tag :room_name, @room.name, class: 'form-control', disabled: true
+          = f.hidden_field :room_id, value: @room.id
+        .form-group
+          = f.label :user_id, 'Utilisateur à ajouter'
+          = f.select :user_id, options_from_collection_for_select(@users, :id, :complete_name), {}, class: 'form-control', required: true
+  .modal-footer.justify-content-between
+    = f.submit 'Enregistrer', class: 'btn btn-primary'

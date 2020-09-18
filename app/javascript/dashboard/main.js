@@ -60,6 +60,7 @@ setEvent = (eventId, eventName, color) => {
                     $('[data-agent="' + agentId + '"][data-date="' + date + '"]')
                         .css('background', color)
                         .removeClass('active');
+                    $('.refresh').show();
                 }
             })
         });
@@ -87,7 +88,11 @@ $(document).on('turbolinks:load', () => {
        });
    }
 
-    $('.dashboard-date').on('apply.daterangepicker', function(ev, picker) {
+    $('.dashboard-date').on('apply.daterangepicker changeDate', function(ev, picker) {
+        $('.dashboard-form').submit();
+    });
+
+    $('.dashboard-team').on('change', function(ev, picker) {
         $('.dashboard-form').submit();
     });
 });

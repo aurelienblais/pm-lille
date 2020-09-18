@@ -1,0 +1,13 @@
+.card
+  .card-header
+    %h3.card-title Salles de discussion
+    .card-tools
+      = link_to new_room_path, remote: true, class: 'btn btn-sm btn-default' do
+        Créer une salle
+  .card-body
+    %table.table.table-bordered.table-head-fixed
+      %thead
+        %tr
+          %th.w-75 Salle
+          %th
+      %tbody#items-table= render items

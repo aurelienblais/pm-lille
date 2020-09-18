@@ -6,7 +6,7 @@
       delay: 2500,
       class: 'bg-success'
   });
-  $('#items-table tbody').append('<%= escape_javascript render item %>');
+  $('#items-table').append('<%= escape_javascript render item %>');
 <% else %>
   $(document).Toasts('create', {
       title: 'Une erreur est survenue',

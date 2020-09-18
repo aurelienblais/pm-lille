@@ -1,0 +1,11 @@
+%tr{ data: { item_id: room.id } }
+  %td
+    = room.name
+    %br
+    %small= "Dernier message : #{display_datetime(room.room_messages.last&.created_at) || 'Jamais'}"
+  %td.text-center
+    .btn-group
+      = link_to room, class: 'btn btn-default btn-sm' do
+        %i.fas.fa-eye
+      -# = link_to room, method: :delete, remote: true, class: 'btn btn-danger btn-sm', data: { confirm: 'Voulez-vous vraiment supprimer cette salle ?' } do
+      -#   %i.fas.fa-trash

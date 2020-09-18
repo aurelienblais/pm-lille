@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+default_room = Room.create(name: 'Général')
+
+User.find_each do |user|
+  RoomUser.create(user: user, room: default_room)
+end
