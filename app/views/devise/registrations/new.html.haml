@@ -1,21 +1,40 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+.register-box
+  .register-logo
+    %a
+      %b> PM
+      Lille
+  .card
+    .card-body.register-card-body
+      %p.login-box-msg Inscription
+      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        .input-group.mb-3
+          = f.text_field :email, class: 'form-control', placeholder: 'E-mail'
+          .input-group-append
+            %span.input-group-text
+              %i.fas.fa-envelope
+        .input-group.mb-3
+          = f.text_field :last_name, class: 'form-control', placeholder: 'Nom'
+          .input-group-append
+            %span.input-group-text
+              %i.fas.fa-user
+        .input-group.mb-3
+          = f.text_field :first_name, class: 'form-control', placeholder: 'Prénom'
+          .input-group-append
+            %span.input-group-text
+              %i.fas.fa-user
+        .input-group.mb-3
+          = f.password_field :password, class: 'form-control', placeholder: 'Mot de passe'
+          .input-group-append
+            %span.input-group-text
+              %i.fas.fa-lock
+        .input-group.mb-3
+          = f.password_field :password_confirmation, class: 'form-control', placeholder: 'Mot de passe (bis)'
+          .input-group-append
+            %span.input-group-text
+              %i.fas.fa-lock
+        .row
+          .col-6
+            = link_to root_path, class: 'btn btn-default btn-block' do
+              Retour
+          .col-6
+            = f.submit 'Valider', class: 'btn btn-primary btn-block'

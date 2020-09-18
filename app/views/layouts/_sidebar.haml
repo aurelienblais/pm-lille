@@ -1,5 +1,6 @@
 %aside.main-sidebar.sidebar-dark-primary.elevation-4
-  = link_to root_path, class: 'brand-link text-center' do
+  = link_to root_path, class: 'brand-link' do
+    = image_tag 'logo.jpg', class: 'brand-image elevation-3'
     %span.brand-text.font-weight-light
       %b PM
       Lille
@@ -16,23 +17,34 @@
             = link_to root_path, class: 'nav-link' do
               %i.far.fa-calendar.nav-icon
               %p Calendrier
-          %li.nav-item
-            = link_to rooms_path, class: 'nav-link' do
-              %i.far.fa-comments.nav-icon
-              %p Discussions
-          %li.nav-item
-            = link_to agents_path, class: 'nav-link' do
-              %i.far.fa-user.nav-icon
-              %p Agents
-          %li.nav-item
-            = link_to teams_path, class: 'nav-link' do
-              %i.fas.fa-sitemap.nav-icon
-              %p Equipes
-          %li.nav-item
-            = link_to ranks_path, class: 'nav-link' do
-              %i.fas.fa-medal.nav-icon
-              %p Grades
-          %li.nav-item
-            = link_to absence_types_path, class: 'nav-link' do
-              %i.fas.fa-map-signs.nav-icon
-              %p Types d'absences
+          - if policy(Room).index?
+            %li.nav-item
+              = link_to rooms_path, class: 'nav-link' do
+                %i.far.fa-comments.nav-icon
+                %p Discussions
+          %li.nav-header Administration
+          - if policy(Agent).index?
+            %li.nav-item
+              = link_to agents_path, class: 'nav-link' do
+                %i.far.fa-user.nav-icon
+                %p Agents
+          - if policy(Team).index?
+            %li.nav-item
+              = link_to teams_path, class: 'nav-link' do
+                %i.fas.fa-sitemap.nav-icon
+                %p Equipes
+          - if policy(Rank).index?
+            %li.nav-item
+              = link_to ranks_path, class: 'nav-link' do
+                %i.fas.fa-medal.nav-icon
+                %p Grades
+          - if policy(AbsenceType).index?
+            %li.nav-item
+              = link_to absence_types_path, class: 'nav-link' do
+                %i.fas.fa-map-signs.nav-icon
+                %p Types d'absences
+          - if policy(User).index?
+            %li.nav-item
+              = link_to users_path, class: 'nav-link' do
+                %i.fas.fa-users.nav-icon
+                %p Utilisateurs

@@ -15,5 +15,5 @@
             = "[#{agent.register_number}]"
             = agent.complete_name
         - @date_range.each do |date|
-          %td.day{ class: date.wday == 6 ? 'sunday' : nil, data: { date: date, agent: agent.id, toggle: :tooltip } }
+          %td.day{ class: wday_to_class(date.wday), data: { date: date, agent: agent.id, toggle: :tooltip } }
             .day-background

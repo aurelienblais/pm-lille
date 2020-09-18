@@ -1,14 +1,19 @@
+# frozen_string_literal: true
+
 class AgentsController < ApplicationController
-  expose :items, -> { Agent.eager_load(:team, :rank).order_by_name.page params[:page] }
+  expose :items, -> { policy_scope(Agent).eager_load(:team, :rank).order_by_name.page params[:page] }
   expose :item, model: Agent, build_params: :agent_params
 
   def index; end
 
   def new
+    authorize item
+    @teams = policy_scope(Team).order_by_name
     render 'ajax/new'
   end
 
   def show
+    authorize item
     @current_date = params[:year] ? Date.parse("01-01-#{params[:year]}") : Date.today
 
     @date_range = @current_date.beginning_of_year..@current_date.end_of_year
@@ -26,20 +31,25 @@ class AgentsController < ApplicationController
   end
 
   def create
+    authorize item
     item.save!
     render 'ajax/create'
   end
 
   def edit
+    authorize item
+    @teams = policy_scope(Team).order_by_name
     render 'ajax/edit'
   end
 
   def update
+    authorize item
     item.update agent_params
     render 'ajax/update'
   end
 
   def destroy
+    authorize item
     item.destroy!
     render 'ajax/destroy'
   end

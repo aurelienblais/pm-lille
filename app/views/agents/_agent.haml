@@ -3,8 +3,9 @@
   %td= agent.complete_name
   %td= agent.register_number
   %td
-    = agent.birthday.strftime '%d-%m-%Y'
-    = "(#{agent.age} ans)"
+    - if agent.birthday
+      = display_date agent.birthday
+      = "(#{agent.age} ans)"
   %td= agent.team
   %td= agent.rank
   %td
