@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def display_date(date)
-    date.strftime('%d-%m-%Y')
+    date ? date.strftime('%d-%m-%Y') : nil
   end
 
   def display_datetime(datetime)

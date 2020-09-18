@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class AbsencesController < ApplicationController
   def create
+    authorize Agent.find(absence_params[:agent_id]), :update?
     if absence_params[:absence_type_id].to_i.zero?
       absence = Absence.find_by absence_params.except(:absence_type_id)
       absence.destroy!

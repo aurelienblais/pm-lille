@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AbsenceType < ApplicationRecord
   has_many :absences, dependent: :delete_all
 

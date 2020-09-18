@@ -1,0 +1,21 @@
+= form_for item, remote: true do |f|
+  .modal-body
+    .row
+      .col-12
+        .form-group
+          = f.label :email, 'E-mail'
+          = f.email_field :email, class: 'form-control', disabled: true
+        .form-group
+          = f.label :last_name, 'Nom'
+          = f.text_field :last_name, class: 'form-control', required: true
+        .form-group
+          = f.label :first_name, 'Prénom'
+          = f.text_field :first_name, class: 'form-control', required: true
+        .form-group
+          = f.label :role, 'Droits'
+          = f.select :role, options_for_select(User::ROLES.without(:superadmin), item.role), {}, { class: 'form-control' }
+        .form-group
+          = f.label :team_ids, 'Equipes'
+          = f.select :team_ids, options_from_collection_for_select(@teams, :id, :name, item.teams.map(&:id)), {}, { class: 'form-control', multiple: true }
+  .modal-footer.justify-content-between
+    = f.submit 'Enregistrer', class: 'btn btn-primary'

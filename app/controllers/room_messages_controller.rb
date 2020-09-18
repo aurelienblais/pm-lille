@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 class RoomMessagesController < ApplicationController
   expose :item, model: RoomMessage, build_params: :room_message_params
 
   def create
+    authorize item
     item.user = current_user
     item.save!
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Agent < ApplicationRecord
   belongs_to :team
   belongs_to :rank
@@ -11,6 +13,8 @@ class Agent < ApplicationRecord
   end
 
   def age
+    return unless birthday
+
     age = Date.today.year - birthday.year
     age -= 1 if Date.today < birthday + age.years
     age
