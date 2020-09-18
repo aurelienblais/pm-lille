@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :teams, only: %i[index new create destroy]
   resources :ranks, only: %i[index new create destroy]
   resources :absence_types
-  resources :absences, only: [:index, :create]
+  resources :absences, only: %i[index create]
   resources :users
 
   root 'dashboard#index'

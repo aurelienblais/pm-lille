@@ -3,11 +3,11 @@
 class Agent < ApplicationRecord
   belongs_to :team
   belongs_to :rank
-  has_many :absences
+  has_many :absences, dependent: :delete_all
 
   scope :order_by_name, -> { order(:last_name).order(:first_name) }
-  scope :belong_to_team, -> (team) { where(team_id: team) }
-  scope :birthdays_in_range, -> (range) { where(birthday: range).order(:birthday) }
+  scope :belong_to_team, ->(team) { where(team_id: team) }
+  scope :birthdays_in_range, ->(range) { where(birthday: range).order(:birthday) }
 
   def complete_name
     "#{first_name} #{last_name}"
