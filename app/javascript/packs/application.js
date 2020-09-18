@@ -16,6 +16,7 @@ window.$ = window.jQuery = jQuery;
 require("bootstrap");
 require("admin-lte");
 require('moment');
+require('chart.js');
 
 require('bootstrap-colorpicker');
 require('bootstrap-daterangepicker');
