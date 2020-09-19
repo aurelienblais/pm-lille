@@ -11,5 +11,13 @@
         .form-group
           = f.label :leave_balance, 'Congés payés à déduire'
           = f.number_field :leave_balance, class: 'form-control', required: true, step: 0.5
+        .form-group
+          = f.label :texture, 'Texture'
+          - AbsenceType::TEXTURES.each do |selector|
+            .form-check
+              = f.radio_button :texture, selector, class: 'form-check-input'
+              .form-check-label
+                .color-display.xl{ class: selector }
+
   .modal-footer.justify-content-between
     = f.submit 'Enregistrer', class: 'btn btn-primary'

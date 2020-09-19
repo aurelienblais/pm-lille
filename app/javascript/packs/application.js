@@ -73,3 +73,14 @@ $(document).on('turbolinks:load', () => {
         }
     });
 });
+
+$(document).on({
+    mouseenter: (e) => {
+        const idx = parseInt($(e.target).closest('td').index()) + 1;
+        $(e.target).closest('table').find('td:nth-child(' + idx +')').addClass('highlight');
+    },
+    mouseleave: (e) => {
+        const idx = parseInt($(e.target).closest('td').index()) + 1;
+        $(e.target).closest('table').find('td:nth-child(' + idx +')').removeClass('highlight');
+    }
+}, ".table-highlight td");

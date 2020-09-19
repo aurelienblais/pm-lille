@@ -42,7 +42,8 @@ class AbsenceTypesController < ApplicationController
     params.require(:absence_type).permit(
       :name,
       :color,
-      :leave_balance
+      :leave_balance,
+      :texture
     )
   end
 end

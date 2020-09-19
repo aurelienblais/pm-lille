@@ -6,6 +6,8 @@ class AbsenceType < ApplicationRecord
   scope :order_by_name, -> { order(:name) }
   scope :with_leave_balance, -> { where('leave_balance > 0') }
 
+  TEXTURES = ['', 'texture-chevron', 'texture-honey', 'texture-striped', 'texture-striped-reverse']
+
   def to_s
     name
   end
