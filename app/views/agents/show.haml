@@ -54,8 +54,8 @@
         .color-display{ style: 'background-color: #fff' }
         .event-name Aucune
       - @absence_types.each do |absence_type|
-        .col-6.event-container{ data: { event: absence_type.id, color: absence_type.color, name: absence_type.name } }
-          .color-display{ style: "background-color: #{absence_type.color}" }
+        .col-6.event-container{ data: { event: absence_type.id, color: absence_type.color, name: absence_type.name, texture: absence_type.texture } }
+          .color-display{ style: "background-color: #{absence_type.color}", class: absence_type.texture }
           .event-name= absence_type.name
 
 :javascript

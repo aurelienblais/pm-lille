@@ -32,7 +32,8 @@ $(document).on('click', '.event-container, .color-display, .event-name', (e) => 
     const eventId = $element.data('event');
     const eventName = $element.data('name');
     const color = $element.data('color');
-    setEvent(eventId, eventName, color);
+    const texture = $element.data('texture');
+    setEvent(eventId, eventName, color, texture);
 });
 
 onSelectedDaysChange = () => {
@@ -43,7 +44,7 @@ onSelectedDaysChange = () => {
     }
 }
 
-setEvent = (eventId, eventName, color) => {
+setEvent = (eventId, eventName, color, texture) => {
     Object.keys(selectedDays).forEach((agentId) => {
         selectedDays[agentId].forEach((date) => {
             $.ajax({
@@ -57,9 +58,11 @@ setEvent = (eventId, eventName, color) => {
                     }
                 },
                 success: () => {
-                    $('[data-agent="' + agentId + '"][data-date="' + date + '"]')
+                    $element = $('[data-agent="' + agentId + '"][data-date="' + date + '"]');
+                    $element
                         .css('background', color)
                         .removeClass('active');
+                    $element.find('.day-texture').attr('class', 'day-texture ' + texture);
                     $('.refresh').show();
                 }
             })
@@ -70,29 +73,31 @@ setEvent = (eventId, eventName, color) => {
 }
 
 $(document).on('turbolinks:load', () => {
-   if (typeof ABSENCES !== 'undefined') {
-       ABSENCES.forEach((absence) => {
-          absence = JSON.parse(absence);
-           $('[data-agent="' + absence.agent_id + '"][data-date="' + absence.date + '"]')
-               .css('background', absence.absence_type.color)
-               .attr('title', absence.absence_type.name);
-       });
+    if (typeof ABSENCES !== 'undefined') {
+        ABSENCES.forEach((absence) => {
+            absence = JSON.parse(absence);
+            $element = $('[data-agent="' + absence.agent_id + '"][data-date="' + absence.date + '"]')
+            $element
+                .css('background', absence.absence_type.color)
+                .attr('title', absence.absence_type.name);
+            $element.find('.day-texture').attr('class', 'day-texture ' + absence.absence_type.texture);
+        });
 
-       total = ABSENCES.reduce(function(rv, x) {
-           x = JSON.parse(x);
-           rv[x.absence_type.id] = 1 + (rv[x.absence_type.id] || 0);
-           return rv;
-       }, {});
-       Object.keys(total).forEach((eventId) => {
-          $("[data-event-type='" + eventId + "']").text(total[eventId]);
-       });
-   }
+        total = ABSENCES.reduce(function (rv, x) {
+            x = JSON.parse(x);
+            rv[x.absence_type.id] = 1 + (rv[x.absence_type.id] || 0);
+            return rv;
+        }, {});
+        Object.keys(total).forEach((eventId) => {
+            $("[data-event-type='" + eventId + "']").text(total[eventId]);
+        });
+    }
 
-    $('.dashboard-date').on('apply.daterangepicker changeDate', function(ev, picker) {
+    $('.dashboard-date').on('apply.daterangepicker changeDate', function (ev, picker) {
         $('.dashboard-form').submit();
     });
 
-    $('.dashboard-team').on('change', function(ev, picker) {
+    $('.dashboard-team').on('change', function (ev, picker) {
         $('.dashboard-form').submit();
     });
 });

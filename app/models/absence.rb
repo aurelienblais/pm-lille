@@ -13,7 +13,8 @@ class Absence < ApplicationRecord
       absence_type: {
         id: absence_type_id,
         name: absence_type.name,
-        color: absence_type.color
+        color: absence_type.color,
+        texture: absence_type.texture
       }
     }.to_json
   end
