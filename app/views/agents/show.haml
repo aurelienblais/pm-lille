@@ -18,7 +18,7 @@
                 .row
                   - @absence_types.each do |absence_type|
                     .col-6.event-container
-                      .color-display.xl{ style: "background-color: #{absence_type.color}", data: { event_type: absence_type.id } } 0
+                      .color-display.xl{ style: "background-color: #{absence_type.color}", data: { event_type: absence_type.id }, class: absence_type.texture } 0
                       .color-name= absence_type.name
             .card
               .card-header
