@@ -13,7 +13,13 @@ Rails.application.routes.draw do
   resources :ranks, only: %i[index new create destroy]
   resources :absence_types
   resources :absences, only: %i[index create]
-  resources :users
+  resources :users do
+    post :reset_password, on: :member
+  end
+
+  namespace :public do
+    resources :agents, only: %i[show]
+  end
 
   root 'dashboard#index'
 end

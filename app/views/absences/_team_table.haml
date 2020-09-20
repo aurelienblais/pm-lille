@@ -2,7 +2,7 @@
   %thead
     %tr
       %th.align-middle.agent-name.fit-text= agents.first.team
-      - @date_range.each do |date|
+      - date_range.each do |date|
         %th
           = date.day
           %br
@@ -12,11 +12,15 @@
       %tr
         %td.text-nowrap.agent-name
           %span.fit-text
-            = link_to agent do
+            - if display_link
+              = link_to agent do
+                = "[#{agent.register_number}]"
+                = agent.complete_name
+            - else
               = "[#{agent.register_number}]"
               = agent.complete_name
-        - @date_range.each do |date|
-          %td.day{ class: wday_to_class(date.wday), data: { date: date, agent: agent.id, toggle: :tooltip } }
+        - date_range.each do |date|
+          %td.day{ class: day_class(agent, date), data: { date: date, agent: agent.id, toggle: :tooltip } }
             .day-texture
             .day-background
 

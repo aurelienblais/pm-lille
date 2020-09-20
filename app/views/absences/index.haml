@@ -14,23 +14,8 @@
 
           .card-body.w-100
             - @agents.group_by(&:team_id).each do |team, agents|
-              = render 'team_table', agents: agents
-
-.card.event-picker{ style: 'display: none;' }
-  .card-header
-    %h3.card-title Assigner un événement
-    .card-tools
-      %btn.btn.btn-sm.float-right{ data: { toggle: :collapse }, href: '.event-picker-body' }
-        %i.fas.fa-angle-up
-  .card-body
-    .row.event-picker-body.collapse
-      .col-6.event-container{ data: { event: 0, color: '' } }
-        .color-display{ style: 'background-color: #fff' }
-        .event-name Aucune
-      - @absence_types.each do |absence_type|
-        .col-6.event-container{ data: { event: absence_type.id, color: absence_type.color, name: absence_type.name, texture: absence_type.texture } }
-          .color-display{ style: "background-color: #{absence_type.color}", class: absence_type.texture }
-          .event-name= absence_type.name
-
+              = render 'team_table', agents: agents, date_range: @date_range, display_link: true
+= render 'absence_types/absence_picker'
 :javascript
   ABSENCES = #{ raw @absences.map(&:to_json) }
+  HOLIDAYS = #{ raw @holidays.to_json }

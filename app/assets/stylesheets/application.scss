@@ -22,8 +22,8 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&lang=en");
 
 .color-display {
-  width: 12px;
-  height: 12px;
+  width: 24px;
+  height: 24px;
   display: inline-block;
   border: 1px solid #EFEFEF;
   color: #fff;
@@ -64,12 +64,12 @@
   }
 
   thead th {
-    width: 2.2vw;
+    width: 2rem;
   }
 
   tbody {
     tr {
-      height: 2.2vw;
+      height: 2rem;
       border: 1px solid white;
 
       &:hover {
@@ -87,8 +87,8 @@
         background: #DADADA;
 
         .day-background {
-          width: 2vw;
-          height: 2vw;
+          width: 2rem;
+          height: 2rem;
           position: sticky;
           opacity: 0;
           background: repeating-linear-gradient(
@@ -101,8 +101,8 @@
         }
 
           .day-texture {
-            width: 2vw;
-            height: 2vw;
+            width: 2rem;
+            height: 2rem;
             top:0;
             left:0;
             position: absolute;
@@ -116,8 +116,8 @@
           width: 100%;
           height: 100%;
           color: white;
-          text-shadow: 1px 1px rgba(0,0,0,0.5);
-          line-height: 2.2vw;
+          text-shadow: 1px 1px 1px #000, 0px 0px 5px #000;
+          line-height: 2rem;
         }
 
         &.active {
@@ -127,8 +127,9 @@
           }
         }
 
-        &.disabled {
+        &.grayed {
           cursor: initial;
+          opacity: 0.1;
         }
       }
 
@@ -145,7 +146,7 @@
 
 .event-picker {
   position: fixed !important;
-  width: 20vw;
+  width: 40vw;
   right: 1vw;
   margin-bottom: 0 !important;
   bottom: 0;
@@ -165,6 +166,7 @@
       cursor: pointer;
       .event-name {
         display: inline-block;
+        line-height: 24px;
       }
     }
   }

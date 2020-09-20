@@ -1,0 +1,39 @@
+.card
+  = render 'ajax/refresh'
+  .card-header
+    %h3.card-title= agent.complete_name
+    - if display_nav
+      .card-tools{ style: 'width: 15vw;' }
+        = form_tag agent_url(agent), method: :get, class: 'dashboard-form' do
+          = text_field_tag :year, @date_range.first.year, class: 'form-control dashboard-date year-picker'
+  .card-body
+    .card
+      .card-header
+        %h3.card-title= "Statistiques #{@date_range.first.year}"
+      .card-body
+        %table.table.table-bordered.table-sm
+          - @absence_types.each do |absence_type|
+            %tr
+              %td.text-center
+                .color-display.xl{ style: "background-color: #{absence_type.color}", data: { event_type: absence_type.id }, class: absence_type.texture } 0
+              %td{ style: 'line-height: 32px' }= absence_type.name
+    - if display_summary
+      .card
+        .card-header
+          %h3.card-title= "Récapitulatif #{@date_range.first.year}"
+        .card-body
+          %table.table.table-bordered.text-center
+            %tr
+              %th Congés par an
+              %th= agent.leave_balance
+            %tr
+              %th Congés pris
+              %th= @leave_taken
+            %tr
+              %th= "Report congés #{@date_range.first.year - 1}"
+              %th= agent.leave_balance - @leave_outstanding
+            %tr.bg-secondary
+              %th
+                Solde disponible
+                %i.fas.fa-info-circle{ data: { toggle: :tooltip }, title: 'Cette valeur est indicative et peux ne pas réfléter la réalité.' }
+              %th= agent.leave_balance - @leave_taken + (agent.leave_balance - @leave_outstanding)

@@ -2,61 +2,12 @@
 %section.content
   .container-fluid
     .row
-      .col-4
-        .card
-          = render 'ajax/refresh'
-          .card-header
-            %h3.card-title= item.complete_name
-            .card-tools{ style: 'width: 15vw;' }
-              = form_tag agent_url(item), method: :get, class: 'dashboard-form' do
-                = text_field_tag :year, @date_range.first.year, class: 'form-control dashboard-date year-picker'
-          .card-body
-            .card
-              .card-header
-                %h3.card-title= "Période du #{display_date @date_range.first} au #{display_date @date_range.last}"
-              .card-body
-                .row
-                  - @absence_types.each do |absence_type|
-                    .col-6.event-container
-                      .color-display.xl{ style: "background-color: #{absence_type.color}", data: { event_type: absence_type.id }, class: absence_type.texture } 0
-                      .color-name= absence_type.name
-            .card
-              .card-header
-                %h3.card-title= "Récapitulatif #{@date_range.first.year}"
-              .card-body
-                %table.table.table-bordered.text-center
-                  %tr
-                    %th Congés par an
-                    %th= item.leave_balance
-                  %tr
-                    %th Congés pris
-                    %th= @leave_taken
-                  %tr
-                    %th= "Report congés #{@date_range.first.year - 1}"
-                    %th= item.leave_balance - @leave_outstanding
-                  %tr.bg-secondary
-                    %th Solde disponible
-                    %th= item.leave_balance - @leave_taken + (item.leave_balance - @leave_outstanding)
+      .col-4= render 'statistics', agent: item, display_summary: true, display_nav: true
       .col-8
         .row
           - @date_range.group_by(&:month).values.each do |date_range|
-            .col-6= render 'absence_table', date_range: date_range
-
-.card.event-picker{ style: 'display: none;' }
-  .card-header
-    %h3.card-title Assigner un événement
-    .card-tools
-      %btn.btn.btn-sm.float-right{ data: { toggle: :collapse }, href: '.event-picker-body' }
-        %i.fas.fa-angle-up
-  .card-body
-    .row.event-picker-body.collapse
-      .col-6.event-container{ data: { event: 0, color: '' } }
-        .color-display{ style: 'background-color: #fff' }
-        .event-name Aucune
-      - @absence_types.each do |absence_type|
-        .col-6.event-container{ data: { event: absence_type.id, color: absence_type.color, name: absence_type.name, texture: absence_type.texture } }
-          .color-display{ style: "background-color: #{absence_type.color}", class: absence_type.texture }
-          .event-name= absence_type.name
-
+            .col-6.d-flex.align-items-stretch= render 'absence_table', date_range: date_range
+= render 'absence_types/absence_picker'
 :javascript
   ABSENCES = #{ raw @absences.map(&:to_json) }
+  HOLIDAYS = #{ raw @holidays.to_json }
