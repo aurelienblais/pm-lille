@@ -28,6 +28,11 @@ class UsersController < ApplicationController
     render 'ajax/update'
   end
 
+  def reset_password
+    @new_password = SecureRandom.hex(4)
+    item.update(password: @new_password, password_confirmation: @new_password)
+  end
+
   private
 
   def user_params

@@ -8,3 +8,6 @@
       .btn-group
         = link_to edit_user_path(user), remote: true, class: 'btn btn-default btn-sm'do
           %i.fas.fa-edit
+      .btn-group
+        = link_to reset_password_user_path(user), remote: true, method: :post, class: 'btn btn-danger btn-sm', data: { confirm: 'Voulez-vous vraiment réinitialiser le mot de passe ?' } do
+          %i.fas.fa-sync-alt

@@ -60,6 +60,7 @@
     <orderEntry type="library" scope="PROVIDED" name="globalid (v0.4.2, RVM: ruby-2.7.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="haml (v5.1.2, RVM: ruby-2.7.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="haml-rails (v2.0.1, RVM: ruby-2.7.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="holidays (v8.3.0, RVM: ruby-2.7.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="html2haml (v2.2.0, RVM: ruby-2.7.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v1.8.5, RVM: ruby-2.7.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="kaminari (v1.2.1, RVM: ruby-2.7.1) [gem]" level="application" />

@@ -24,6 +24,8 @@ class AgentsController < ApplicationController
                 .within_range(@date_range)
                 .where(agent: item)
 
+    @holidays = Holidays.between(@date_range.first, @date_range.last, :fr)
+
     @leave_taken = item.leave_balance_for_range @date_range
     @leave_outstanding = item.leave_balance_for_range @last_year_range
 
@@ -66,7 +68,8 @@ class AgentsController < ApplicationController
       :departure_date,
       :team_id,
       :rank_id,
-      :leave_balance
+      :leave_balance,
+      :token
     )
   end
 end

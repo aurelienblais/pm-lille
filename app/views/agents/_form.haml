@@ -30,5 +30,14 @@
         .form-group
           = f.label :rank_id, 'Grade'
           = f.select :rank_id, options_from_collection_for_select(Rank.order_by_name, :id, :name), {}, { class: 'form-control' }
+        - if item.persisted?
+          = f.label :token do
+            Token
+            %i.fas.fa-info-circle{ data: { toggle: :tooltip }, title: "Ce token permet à l'agent d'accèder à sa page personnelle et ne doit être regénéré qu'en cas de besoin." }
+          .input-group
+            = f.text_field :token, class: 'form-control token-field', disabled: true
+            .input-group-append
+              %span.input-group-text{ data: { toggle: :tooltip }, title: 'Générer un nouveau token' }
+                %i.fas.fa-sync-alt
   .modal-footer.justify-content-between
     = f.submit 'Enregistrer', class: 'btn btn-primary'

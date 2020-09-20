@@ -1,4 +1,4 @@
-.card
+.card.w-100
   .card-header
     %h3.card-title= month_to_s date_range[0].month
   .card-body
@@ -13,14 +13,14 @@
           %th S
           %th D
       %tbody
-        - date_range[0].wday.times.each { date_range.unshift 0 }
+        - (date_range[0].wday - 1 < 0 ? 6 : date_range[0].wday - 1).times.each { date_range.unshift 0 }
         - date_range.each_slice(7) do |dates|
           %tr
             - dates.each do |date|
               - if date.kind_of? Integer
                 %td
               - else
-                %td.day{ class: date.wday == 6 ? 'sunday' : nil, data: { date: date, agent: item.id, toggle: :tooltip } }
+                %td.day{ class: day_class(item, date), data: { date: date, agent: item.id, toggle: :tooltip } }
                   %span.day-number= date.day
                   .day-texture
                   .day-background

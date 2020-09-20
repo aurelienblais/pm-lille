@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_18_234712) do
+ActiveRecord::Schema.define(version: 2020_09_20_203711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,8 +18,9 @@ ActiveRecord::Schema.define(version: 2020_09_18_234712) do
   create_table "absence_types", force: :cascade do |t|
     t.string "name"
     t.string "color"
-    t.integer "leave_balance", default: 0
+    t.decimal "leave_balance", default: "0.0"
     t.string "texture"
+    t.boolean "display_statistic", default: true
   end
 
   create_table "absences", force: :cascade do |t|
@@ -40,6 +41,7 @@ ActiveRecord::Schema.define(version: 2020_09_18_234712) do
     t.bigint "team_id"
     t.bigint "rank_id"
     t.integer "leave_balance", default: 35
+    t.string "token"
     t.index ["rank_id"], name: "index_agents_on_rank_id"
     t.index ["team_id"], name: "index_agents_on_team_id"
   end

@@ -95,6 +95,7 @@ GEM
       haml (>= 4.0.6, < 6.0)
       html2haml (>= 1.0.1)
       railties (>= 5.1)
+    holidays (8.3.0)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
@@ -256,6 +257,7 @@ DEPENDENCIES
   dotenv-rails
   foreman
   haml-rails (~> 2.0)
+  holidays
   kaminari
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)

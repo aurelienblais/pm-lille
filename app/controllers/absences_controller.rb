@@ -12,10 +12,12 @@ class AbsencesController < ApplicationController
       @date_range = @current_date.beginning_of_month..@current_date.end_of_month
     end
 
-    @agents = policy_scope(Agent).eager_load(:team).merge(Team.order_by_name).order_by_name
+    @agents = policy_scope(Agent).eager_load(:team).merge(Team.order_by_name).order_by_name.present_in_range(@date_range)
     @agents = @agents.belong_to_team(params[:team_id]) if params[:team_id].present?
 
     @absences = Absence.eager_load(:agent, :absence_type).where(agent: @agents).within_range(@date_range)
+
+    @holidays = Holidays.between(@date_range.first, @date_range.last, :fr)
 
     @absence_types = AbsenceType.order_by_name
     @teams = policy_scope(Team).order_by_name
