@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  *= require bootstrap
+ *= require select2
  *= require admin-lte/dist/css/adminlte
  *= require bootstrap-colorpicker/dist/css/bootstrap-colorpicker
  *= require bootstrap-daterangepicker/daterangepicker
@@ -43,6 +44,7 @@
 
 .fit-text {
   width: 100%;
+  min-width: 100px;
   display: block;
   overflow: hidden;
 }
@@ -57,8 +59,10 @@
 
   thead th.agent-name {
     width: 100%;
+    min-width: 150px;
     a {
       width: 100%;
+      min-width: 150px;
       overflow: hidden;
     }
   }

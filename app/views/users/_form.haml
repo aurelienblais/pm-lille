@@ -13,9 +13,9 @@
           = f.text_field :first_name, class: 'form-control', required: true
         .form-group
           = f.label :role, 'Droits'
-          = f.select :role, options_for_select(User::ROLES.without(:superadmin), item.role), {}, { class: 'form-control' }
+          = f.select :role, options_for_select(User::ROLES.without(:superadmin), item.role), {}, { class: 'form-control select2' }
         .form-group
           = f.label :team_ids, 'Equipes'
-          = f.select :team_ids, options_from_collection_for_select(@teams, :id, :name, item.teams.map(&:id)), {}, { class: 'form-control', multiple: true }
+          = f.select :team_ids, options_from_collection_for_select(@teams, :id, :name, item.teams.map(&:id)), {}, { class: 'form-control select2-multiple', multiple: true }
   .modal-footer.justify-content-between
     = f.submit 'Enregistrer', class: 'btn btn-primary'

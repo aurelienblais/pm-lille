@@ -14,17 +14,21 @@ $(document).on('turbolinks:load', () => {
             },
             {
                 received: function (data) {
-                    var content = messageTemplate.clone(true, true);
+                    if (data.destroyed) {
+                        $('[data-message-id="' + data.id + '"]').remove();
+                    } else {
+                        var content = messageTemplate.clone(true, true);
 
-                    content.find('.direct-chat-img').attr('src', data.user_avatar_url);
-                    content.find('.direct-chat-name').text(data.user_name);
-                    content.find('.direct-chat-text').text(data.message);
-                    content.find('.direct-chat-timestamp').text(data.parsed_date);
-                    content.removeClass('d-none');
-                    if (userId !== data.user_id)
-                        content.addClass('right');
-                    $element.append(content);
-                    $element.animate({scrollTop: $element.prop("scrollHeight")}, 1000);
+                        content.find('.direct-chat-img').attr('src', data.user_avatar_url);
+                        content.find('.direct-chat-name').text(data.user_name);
+                        content.find('.direct-chat-text').text(data.message);
+                        content.find('.direct-chat-timestamp').text(data.parsed_date);
+                        content.removeClass('d-none');
+                        if (userId !== data.user_id)
+                            content.addClass('right');
+                        $element.append(content);
+                        $element.animate({scrollTop: $element.prop("scrollHeight")}, 1000);
+                    }
                 }
             }
         );

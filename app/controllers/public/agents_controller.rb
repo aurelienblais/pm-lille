@@ -6,7 +6,7 @@ class Public::AgentsController < ApplicationController
     @agent = Agent.find_by(token: params[:id])
 
     @date_range = Date.today.beginning_of_year..Date.today.end_of_year
-    @month_range = Date.today.beginning_of_month..Date.today.end_of_month
+    @month_range = Date.today..(Date.today + 25.days)
 
     @absences = Absence
                     .eager_load(:agent, :absence_type)

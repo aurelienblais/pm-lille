@@ -3,13 +3,13 @@
   .container-fluid
     .row
       .col-12
-        .card
+        .card{ style: 'max-width: 1500px' }
           .card-header
             %h3.card-title Calendrier
             .card-tools{ style: 'width: 30vw;' }
               = form_tag absences_path, method: :get, class: 'dashboard-form' do
                 .row
-                  .col-6= select_tag :team_id, options_from_collection_for_select(@teams, :id, :name, params[:team_id]), class: 'form-control dashboard-team', include_blank: 'Toutes'
+                  .col-6= select_tag :team_id, options_from_collection_for_select(@teams, :id, :name, params[:team_id]), class: 'form-control dashboard-team select2', include_blank: 'Toutes'
                   .col-6= text_field_tag :dates, "#{@date_range.first.strftime('%d-%m-%Y')} - #{@date_range.last.strftime('%d-%m-%Y')}", class: 'form-control dashboard-date'
 
           .card-body.w-100

@@ -1,0 +1,3 @@
+<% if item.destroyed? %>
+$('[data-message-id="<%= item.id %>"]').remove();
+<% end %>
