@@ -27,6 +27,14 @@ class RoomsController < ApplicationController
     render 'error/duplicate'
   end
 
+  def purge
+    authorize item
+    item.room_messages.find_each do |room_message|
+      room_message.destroy
+      RoomChannel.broadcast_to item, room_message
+    end
+  end
+
   private
 
   def room_params

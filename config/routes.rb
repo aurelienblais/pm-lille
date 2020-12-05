@@ -5,9 +5,11 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :room_messages, only: [:create]
+  resources :room_messages, only: %i[create destroy]
   resources :room_users, only: %i[create new]
-  resources :rooms, only: %i[index show new create]
+  resources :rooms, only: %i[index show new create] do
+    post :purge, on: :member
+  end
   resources :agents
   resources :teams, only: %i[index new create destroy]
   resources :ranks, only: %i[index new create destroy]

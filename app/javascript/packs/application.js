@@ -13,10 +13,16 @@ const jQuery = require("jquery");
 global.$ = global.jQuery = jQuery;
 window.$ = window.jQuery = jQuery;
 
+const moment = require('moment');
+global.moment = moment;
+window.moment = moment;
+
 require("bootstrap");
 require("admin-lte");
 require('moment');
 require('chart.js');
+require('select2');
+
 
 require('bootstrap-colorpicker');
 require('bootstrap-daterangepicker');
@@ -32,6 +38,8 @@ require('bootstrap-datepicker');
 require('dashboard/main');
 
 $(document).on('turbolinks:load', () => {
+    $('.select2').select2();
+    $('.select2-multiple').select2({ multiple: true })
     $('[data-toggle="tooltip"]').tooltip();
     $(".year-picker").datepicker({
         format: "yyyy",
@@ -42,6 +50,15 @@ $(document).on('turbolinks:load', () => {
         maxSpan: {
             days: 31
         },
+        ranges: {
+            'Hier': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Aujourd\'hui': [moment(), moment()],
+            'Demain': [moment().add(1, 'days'), moment().add(1, 'days')],
+            'Mois dernier': [moment().startOf('month').subtract(1, 'months'), moment().endOf('month').subtract(1, 'months')],
+            'Mois courant': [moment().startOf('month'), moment().endOf('month')],
+            'Mois prochain': [moment().startOf('month').add(1, 'months'), moment().endOf('month').add(1, 'months')],
+        },
+        "alwaysShowCalendars": true,
         locale: {
             format: 'DD-MM-YYYY',
             separator: " - ",

@@ -23,4 +23,8 @@ class RoomMessagePolicy < ApplicationPolicy
   def create?
     user.superadmin? || record.room.users.include?(user)
   end
+
+  def destroy?
+    user.superadmin? || user.admin?
+  end
 end

@@ -24,7 +24,8 @@ class RoomMessage < ApplicationRecord
       user_name: get_user.complete_name,
       parsed_date: ApplicationController.helpers.display_datetime(created_at),
       room_name: room.name,
-      room_path: Rails.application.routes.url_helpers.room_path(room)
+      room_path: Rails.application.routes.url_helpers.room_path(room),
+      destroyed: destroyed?
     )
   end
 end

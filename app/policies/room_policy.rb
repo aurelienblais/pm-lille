@@ -35,4 +35,8 @@ class RoomPolicy < ApplicationPolicy
   def create?
     true
   end
+
+  def purge?
+    user.superadmin? || user.admin?
+  end
 end

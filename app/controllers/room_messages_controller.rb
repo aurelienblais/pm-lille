@@ -17,6 +17,15 @@ class RoomMessagesController < ApplicationController
     render 'room_messages/create'
   end
 
+  def destroy
+    authorize item
+    item.destroy!
+
+    RoomChannel.broadcast_to item.room, item
+
+    render 'room_messages/destroy'
+  end
+
   private
 
   def room_message_params
