@@ -9,11 +9,11 @@ module AbsenceHelper
   end
 
   def wday_to_s(day)
-    WDAY[day]
+    WDAY[day - 1]
   end
 
   def wday_to_class(day)
-    WDAY_CLASS[day]
+    WDAY_CLASS[day - 1]
   end
 
   def month_to_s(month)
