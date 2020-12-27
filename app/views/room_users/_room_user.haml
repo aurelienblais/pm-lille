@@ -1,4 +1,4 @@
-- unless room_user.user.disabled? || room_user.user.superadmin?
+- unless room_user.user.nil? || room_user.user.disabled? || room_user.user.superadmin?
   %li
     %img.contacts-list-img{ src: room_user.user.gravatar_url }
     .contacts-list-info
