@@ -12,10 +12,17 @@ class RoomMessage < ApplicationRecord
   def get_user
     return user if user
 
-    OpenStruct.new({
-                     complete_name: 'Système',
-                     gravatar_url: ActionController::Base.helpers.asset_path('logo.jpg')
-                   })
+    if room.agent.present?
+      OpenStruct.new({
+                       complete_name: room.agent.complete_name,
+                       gravatar_url: ActionController::Base.helpers.asset_path('agent.jpg')
+                     })
+    else
+      OpenStruct.new({
+                       complete_name: 'Système',
+                       gravatar_url: ActionController::Base.helpers.asset_path('logo.jpg')
+                     })
+    end
   end
 
   def as_json(options)

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class RoomMessagesController < ApplicationController
+  skip_before_action :authenticate_user!
+
   expose :item, model: RoomMessage, build_params: :room_message_params
 
   def create
