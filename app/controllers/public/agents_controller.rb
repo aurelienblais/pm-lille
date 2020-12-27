@@ -22,5 +22,7 @@ class Public::AgentsController < ApplicationController
                          .where(agent: @agents)
                          .within_range(@month_range)
 
+    @room = Room.find_or_create_by!(agent: @agent, name: @agent.complete_name)
+
   end
 end

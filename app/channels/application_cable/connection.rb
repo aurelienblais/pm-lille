@@ -14,7 +14,7 @@ module ApplicationCable
       if verified_user = User.find_by(id: cookies.signed['user.id'])
         verified_user
       else
-        reject_unauthorized_connection
+        nil
       end
     end
   end

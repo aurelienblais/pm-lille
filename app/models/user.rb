@@ -6,12 +6,15 @@ class User < ApplicationRecord
 
   has_many :user_teams
   has_many :teams, through: :user_teams
+  has_many :room_users
+  has_many :rooms, through: :room_users
 
   scope :order_by_name, -> { order(:first_name).order(:last_name) }
 
   ROLES = %i[disabled user admin superadmin].freeze
 
   after_create :join_default_room
+  after_update :join_agents_rooms
 
   ROLES.each do |r|
     define_method "#{r}?" do
@@ -36,5 +39,15 @@ class User < ApplicationRecord
 
   def join_default_room
     RoomUser.create!(room_id: ENV.fetch('DEFAULT_ROOM_ID', Room.first.id), user_id: id)
+  end
+
+  def join_agents_rooms
+    joined_rooms = rooms.where.not(agent_id: nil)
+    room_users.where(room: joined_rooms).destroy_all
+
+    agents = teams.flat_map(&:agents)
+    Room.where(agent: agents).each do |room|
+      RoomUser.create!(room: room, user: self)
+    end
   end
 end

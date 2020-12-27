@@ -21,10 +21,14 @@ class RoomMessagePolicy < ApplicationPolicy
   end
 
   def create?
+    return true if record.room.agent.present?
+
     user.superadmin? || record.room.users.include?(user)
   end
 
   def destroy?
+    return false if user.nil?
+
     user.superadmin? || user.admin?
   end
 end

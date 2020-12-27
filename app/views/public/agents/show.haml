@@ -11,6 +11,18 @@
       .col-xl-4.col-sm-12
         .row
           .col-12= render 'agents/statistics', agent: @agent, display_summary: false, display_nav: false
+          .col-12
+            .card
+              .card-body
+                .direct-chat-messages{ data: { channel_subscribe: :room, room_id: @room.id } }= render partial: 'room_messages/room_message', collection: @room.room_messages
+              .card-footer
+                = form_for RoomMessage.new(room: @room), remote: true do |f|
+                  .input-group
+                    = f.hidden_field :room_id
+                    = f.text_field :message, class: 'form-control', id: 'room-message-input', required: true
+                    .input-group-append
+                      = f.button type: :submit, class: 'btn btn-sm btn-default' do
+                        %i.fas.fa-paper-plane
           .col-xl-12.d-none.d-lg-block
             .card
               .card-body
@@ -26,9 +38,17 @@
           - @date_range.group_by(&:month).values.each do |date_range|
             .col-xl-4.d-flex.align-items-stretch= render 'agents/absence_table', date_range: date_range, item: @agent
 
+.direct-chat-msg.d-none{ data: { role: 'message-template' } }
+  .direct-chat-infos.clearfix
+    %span.direct-chat-name.float-left
+    %span.direct-chat-timestamp.float-right
+  %img.direct-chat-img
+  .direct-chat-text
+
 :javascript
   ABSENCES = #{ raw @absences.map(&:to_json) }
   HOLIDAYS = #{ raw @holidays.to_json }
   $(document).on('turbolinks:load', () => {
     $('.day').addClass('disabled');
   });
+  userId = null;
