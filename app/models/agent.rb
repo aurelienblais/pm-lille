@@ -9,7 +9,7 @@ class Agent < ApplicationRecord
 
   scope :order_by_name, -> { order(:last_name).order(:first_name) }
   scope :belong_to_team, ->(team) { where(team_id: team) }
-  scope :birthdays_in_next_days, ->(days) { where("to_char(birthday, 'mmdd') in(?)", days.times.map{|i| (Date.current + i.days).strftime('%m%d')}).order(:birthday) }
+  scope :birthdays_in_next_days, ->(days) { where("to_char(birthday, 'mmdd') in(?)", days.times.map{|i| (Date.current + i.days).strftime('%m%d')}).order("to_char(birthday, 'mmdd') ASC") }
   scope :present_in_range, -> (range) {
     arrival_date_in_range(range).departure_date_in_range(range)
   }
