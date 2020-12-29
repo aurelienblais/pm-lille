@@ -46,7 +46,8 @@
   .direct-chat-text
 
 :javascript
-  ABSENCES = #{ raw (@absences + @team_absences).map(&:to_json) }
+  ABSENCES = #{ raw @absences.map(&:to_json) }
+  TEAM_ABSENCES = #{ raw @team_absences.map(&:to_json) }
   HOLIDAYS = #{ raw @holidays.to_json }
   $(document).on('turbolinks:load', () => {
     $('.day').addClass('disabled');
