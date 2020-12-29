@@ -8,7 +8,7 @@ class AgentPolicy < ApplicationPolicy
     end
 
     def resolve
-      if user.superadmin? || user.admin?
+      if user.superadmin? || (user.admin? && user.teams.empty?)
         scope.all
       else
         scope.where(team_id: user.teams.map(&:id))

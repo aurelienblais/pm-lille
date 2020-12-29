@@ -7,12 +7,11 @@ class DashboardController < ApplicationController
 
     @agents = policy_scope(Agent).all
     @birthdays = @agents
-                     .birthdays_in_range(@month_range)
+                     .birthdays_in_next_days(30)
                      .page(params[:page])
                      .per(5)
 
-    @room_id = ENV.fetch('DEFAULT_ROOM_ID', Room.first.id)
-    @last_messages = policy_scope(RoomMessage).eager_load(:user).without_system.for_room(@room_id).latest(5)
+    @last_messages = policy_scope(RoomMessage).eager_load(:user).without_system.latest(10)
 
     @month_absences = policy_scope(Absence)
                           .eager_load(:absence_type)
