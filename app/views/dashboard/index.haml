@@ -23,9 +23,6 @@
             %h3.card-title Derniers messages
           .card-body
             .direct-chat-messages{ data: { channel_subscribe: :room, room_id: @room_id } }= render @last_messages
-          .card-footer
-            = link_to room_path(@room_id), class: 'btn btn-default' do
-              Voir tout
       .col-4
         .row
           .col-12
