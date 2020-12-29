@@ -1,6 +1,6 @@
 import consumer from "./consumer"
 
-$(() => {
+$(document).on('turbolinks:load', () => {
     if (typeof userId !== 'undefined') {
         consumer.subscriptions.create(
             {
@@ -16,9 +16,9 @@ $(() => {
                 },
 
                 received(data) {
-                    if (currentRoom && currentRoom == data.room_id)
+                    if (typeof currentRoom !== 'undefined' && currentRoom == data.room_id)
                         return;
-                    if (userId !== data.user_id) {
+                    if (userId !== data.user_id || data.user_id === null) {
                         $(document).Toasts('create', {
                             title: 'Nouveau message',
                             body: 'Nouveau message de ' + data.user_name + ' dans la salle ' + data.room_name,
