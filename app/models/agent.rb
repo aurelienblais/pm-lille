@@ -37,7 +37,7 @@ class Agent < ApplicationRecord
   end
 
   def leave_balance_for_range(range)
-    return leave_balance if range.first.year < 2020 # App start year
+    return leave_balance if range.first.year <= 2020 # App start year
 
     Absence
       .includes(:absence_type)

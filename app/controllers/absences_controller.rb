@@ -30,6 +30,7 @@ class AbsencesController < ApplicationController
       absence.destroy!
       head :ok
     else
+      Absence.where(agent_id: params[:absence][:agent_id], date: params[:absence][:date]).destroy_all
       if Absence.create!(absence_params)
         head :ok
       else
