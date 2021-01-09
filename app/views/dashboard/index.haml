@@ -2,7 +2,7 @@
 %section.content
   .container-fluid
     .row
-      .col-4
+      .col-6
         .card
           .card-header
             %h3.card-title Anniversaires
@@ -17,22 +17,21 @@
                     %td= display_date agent.birthday
           - unless @birthdays.empty?
             .card-footer= paginate @birthdays
-      .col-4
         .card
           .card-header
             %h3.card-title Derniers messages
           .card-body
             .direct-chat-messages{ data: { channel_subscribe: :room, room_id: @room_id } }= render @last_messages
-      .col-4
+      .col-6
         .row
           .col-12
-            .card
+            .card{ style: "height: 50vh;" }
               .card-header
                 %h3.card-title Statistiques du mois
               .card-body
                 %canvas#month-absences-chart
           .col-12
-            .card
+            .card{ style: "height: 50vh;" }
               .card-header
                 %h3.card-title Statistiques de l'année
               .card-body

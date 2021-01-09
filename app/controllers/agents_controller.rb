@@ -17,7 +17,7 @@ class AgentsController < ApplicationController
     @current_date = params[:year] ? Date.parse("01-01-#{params[:year]}") : Date.today
 
     @date_range = @current_date.beginning_of_year..@current_date.end_of_year
-    @last_year_range = (@current_date - 1.year).beginning_of_year..(@current_date - 1.year).end_of_year
+    @last_year_range = (@date_range.first - 1.year).beginning_of_year..(@date_range.last - 1.year).end_of_year
 
     @absences = Absence
                 .eager_load(:agent, :absence_type)

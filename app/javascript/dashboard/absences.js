@@ -15,6 +15,7 @@ $(document).on('turbolinks:load', () => {
             return rv;
         }, {});
         Object.keys(total).forEach((eventId) => {
+            console.log(eventId + " " + total[eventId]);
             $("[data-event-type='" + eventId + "']").text(total[eventId]);
         });
     }
