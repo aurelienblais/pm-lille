@@ -13,8 +13,6 @@ module ApplicationCable
     def find_verified_user
       if verified_user = User.find_by(id: cookies.signed['user.id'])
         verified_user
-      else
-        nil
       end
     end
   end

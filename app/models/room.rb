@@ -5,7 +5,7 @@ class Room < ApplicationRecord
                            inverse_of: :room
   has_many :room_users, dependent: :destroy
   has_many :users, through: :room_users
-  belongs_to :agent, required: false
+  belongs_to :agent, optional: true
 
   scope :order_by_name, -> { order(:name) }
   scope :order_by_last_message, -> { includes(:room_messages).order('room_messages.created_at desc') }

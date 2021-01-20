@@ -9,19 +9,23 @@ class Agent < ApplicationRecord
 
   scope :order_by_name, -> { order(:last_name).order(:first_name) }
   scope :belong_to_team, ->(team) { where(team_id: team) }
-  scope :birthdays_in_next_days, ->(days) { where("to_char(birthday, 'mmdd') in(?)", days.times.map{|i| (Date.current + i.days).strftime('%m%d')}).order("to_char(birthday, 'mmdd') ASC") }
-  scope :present_in_range, -> (range) {
+  scope :birthdays_in_next_days, lambda { |days|
+                                   where("to_char(birthday, 'mmdd') in(?)", days.times.map do |i|
+                                                                              (Date.current + i.days).strftime('%m%d')
+                                                                            end).order("to_char(birthday, 'mmdd') ASC")
+                                 }
+  scope :present_in_range, lambda { |range|
     arrival_date_in_range(range).departure_date_in_range(range)
   }
-  scope :arrival_date_in_range, -> (range) {
+  scope :arrival_date_in_range, lambda { |range|
     where('arrival_date < ?', range.first)
-        .or(where(arrival_date: range))
-        .or(where(arrival_date: nil))
+      .or(where(arrival_date: range))
+      .or(where(arrival_date: nil))
   }
-  scope :departure_date_in_range, -> (range) {
+  scope :departure_date_in_range, lambda { |range|
     where('departure_date > ?', range.last)
-         .or(where(departure_date: range))
-        .or(where(departure_date: nil))
+      .or(where(departure_date: range))
+      .or(where(departure_date: nil))
   }
 
   def complete_name
@@ -51,7 +55,8 @@ class Agent < ApplicationRecord
   private
 
   def generate_token
-    return unless token.blank?
-    self.token = Digest::SHA1.hexdigest([Time.now, rand].join)
+    return if token.present?
+
+    self.token = Digest::SHA1.hexdigest([Time.zone.now, rand].join)
   end
 end

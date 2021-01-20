@@ -5,9 +5,9 @@ class AbsenceType < ApplicationRecord
 
   scope :order_by_name, -> { order(:name) }
   scope :with_leave_balance, -> { where('leave_balance > 0') }
-  scope :only_display_statistic, -> () { where(display_statistic: true) }
+  scope :only_display_statistic, -> { where(display_statistic: true) }
 
-  TEXTURES = ['', 'texture-chevron', 'texture-honey', 'texture-striped', 'texture-striped-reverse']
+  TEXTURES = ['', 'texture-chevron', 'texture-honey', 'texture-striped', 'texture-striped-reverse'].freeze
 
   def to_s
     name
