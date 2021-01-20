@@ -12,4 +12,13 @@ class AbsenceType < ApplicationRecord
   def to_s
     name
   end
+
+  def to_hash
+    {
+      id: id,
+      name: name,
+      color: color,
+      texture: texture
+    }
+  end
 end

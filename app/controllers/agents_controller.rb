@@ -25,6 +25,10 @@ class AgentsController < ApplicationController
                 .where(agent: item)
 
     @holidays = Holidays.between(@date_range.first, @date_range.last, :fr)
+    @recurring_absences = RecurringAbsence
+                            .eager_load(:agent, :absence_type)
+                            .where(agent: item)
+                            .flat_map { |ra| ra.for_range(@date_range) }.compact
 
     @leave_taken = item.leave_balance_for_range @date_range
     @leave_outstanding = item.leave_balance_for_range @last_year_range

@@ -1,0 +1,21 @@
+= form_for item, remote: true do |f|
+  .modal-body
+    .row
+      .col-12
+        .form-group
+          = f.label :agent_id, 'Agent'
+          = f.select :agent_id, options_from_collection_for_select(@agents, :id, :complete_name), {}, { class: 'form-control select2' }
+        .form-group
+          = f.label :absence_type_id, 'Type d\'absence'
+          = f.select :absence_type_id, options_from_collection_for_select(@absence_types, :id, :name), {}, { class: 'form-control select2' }
+        .form-group
+          = f.label :start_date, 'Date de début'
+          = f.date_field :start_date, class: 'form-control'
+        .form-group
+          = f.label :end_date, 'Date de fin'
+          = f.date_field :end_date, class: 'form-control'
+        .form-group
+          = f.label :periodicity, 'Périodicité (en jours)'
+          = f.number_field :periodicity, class: 'form-control', step: 1
+  .modal-footer.justify-content-between
+    = f.submit 'Enregistrer', class: 'btn btn-primary'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_27_192003) do
+ActiveRecord::Schema.define(version: 2021_01_20_102343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,16 @@ ActiveRecord::Schema.define(version: 2020_12_27_192003) do
 
   create_table "ranks", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "recurring_absences", force: :cascade do |t|
+    t.bigint "agent_id"
+    t.bigint "absence_type_id"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "periodicity"
+    t.index ["absence_type_id"], name: "index_recurring_absences_on_absence_type_id"
+    t.index ["agent_id"], name: "index_recurring_absences_on_agent_id"
   end
 
   create_table "room_messages", force: :cascade do |t|

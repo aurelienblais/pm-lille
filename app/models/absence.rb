@@ -10,12 +10,8 @@ class Absence < ApplicationRecord
     {
       agent_id: agent_id,
       date: date,
-      absence_type: {
-        id: absence_type_id,
-        name: absence_type.name,
-        color: absence_type.color,
-        texture: absence_type.texture
-      }
+      absence_type: absence_type.to_hash,
+      recurring: false
     }.to_json
   end
 end

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :ranks, only: %i[index new create destroy]
   resources :absence_types
   resources :absences, only: %i[index create]
+  resources :recurring_absences
   resources :users do
     post :reset_password, on: :member
   end

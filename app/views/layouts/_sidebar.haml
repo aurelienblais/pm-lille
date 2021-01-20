@@ -22,6 +22,10 @@
             = link_to absences_path, class: 'nav-link' do
               %i.far.fa-calendar.nav-icon
               %p Calendrier
+          %li.nav-item
+            = link_to recurring_absences_path, class: 'nav-link' do
+              %i.fas.fa-stopwatch.nav-icon
+              %p Absences récurrentes
           - if policy(Room).index?
             %li.nav-item
               = link_to rooms_path, class: 'nav-link' do
