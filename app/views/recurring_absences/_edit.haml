@@ -1,0 +1,14 @@
+.modal#edit-modal
+  .modal-dialog.modal-xl
+    .modal-content
+      .modal-header
+        %h4.modal-title Modifier une absence récurrente
+        %button.close{type: :button, data: { dismiss: :modal }}
+          %span ×
+      .row
+        .col-12
+          %p.text-center
+            %b Attention ! Les changements sur une absence récurrente modifient l'historique complet !
+            %br
+            Si la récurrence change, mettez une date de fin sur celle-ci et re-créez en une.
+      = render 'form'

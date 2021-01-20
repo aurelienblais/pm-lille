@@ -16,8 +16,11 @@ class AbsencesController < ApplicationController
     @agents = @agents.belong_to_team(params[:team_id]) if params[:team_id].present?
 
     @absences = Absence.eager_load(:agent, :absence_type).where(agent: @agents).within_range(@date_range)
-
     @holidays = Holidays.between(@date_range.first, @date_range.last, :fr)
+    @recurring_absences = RecurringAbsence
+                            .eager_load(:agent, :absence_type)
+                            .where(agent: @agents)
+                            .flat_map { |ra| ra.for_range(@date_range) }.compact
 
     @absence_types = AbsenceType.order_by_name
     @teams = policy_scope(Team).order_by_name

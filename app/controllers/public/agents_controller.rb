@@ -15,6 +15,11 @@ class Public::AgentsController < ApplicationController
 
     @holidays = Holidays.between(@date_range.first, @date_range.last, :fr)
     @absence_types = AbsenceType.order_by_name
+    @recurring_absences = RecurringAbsence
+                            .eager_load(:agent, :absence_type)
+                            .where(agent: @agent)
+                            .flat_map { |ra| ra.for_range(@date_range) }.compact
+
 
     @team_agents = @agent.team.agents.order_by_name.present_in_range(@month_range)
     @team_absences = Absence

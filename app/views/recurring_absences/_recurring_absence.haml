@@ -1,0 +1,14 @@
+%tr{ data: { item_id: recurring_absence.id } }
+  %td= recurring_absence.id
+  %td= recurring_absence.agent.complete_name
+  %td
+    .color-display{ style: "background-color: #{recurring_absence.absence_type.color}", class: recurring_absence.absence_type.texture }
+    = recurring_absence.absence_type.name
+  %td= display_date recurring_absence.start_date
+  %td= display_date recurring_absence.end_date
+  %td
+    .btn-group
+      = link_to edit_recurring_absence_path(recurring_absence), remote: true, class: 'btn btn-default btn-sm'do
+        %i.fas.fa-edit
+      = link_to recurring_absence, method: :delete, remote: true, class: 'btn btn-danger btn-sm', data: { confirm: 'Voulez-vous vraiment TOTALEMENT supprimer cette absence récurrente ?' } do
+        %i.fas.fa-trash
