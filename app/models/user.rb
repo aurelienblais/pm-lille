@@ -46,7 +46,7 @@ class User < ApplicationRecord
     room_users.where(room: joined_rooms).destroy_all
 
     agents = teams.flat_map(&:agents)
-    Room.where(agent: agents).each do |room|
+    Room.where(agent: agents).find_each do |room|
       RoomUser.create!(room: room, user: self)
     end
   end

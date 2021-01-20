@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AbsenceHelper
   WDAY = %w[L M M J V S D].freeze
   WDAY_CLASS = %w[monday tuesday wednesday thrusday friday saturday sunday].freeze
