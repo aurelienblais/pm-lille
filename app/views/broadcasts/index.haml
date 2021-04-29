@@ -1,0 +1,26 @@
+%section.content-header
+%section.content
+  .container-fluid
+    .row
+      .col-12
+        .card
+          .card-header
+            %h3.card-title Multi-diffusion
+          .card-body
+            %p
+              Sélectionnez "Tous" pour envoyer un message à toutes vos équipes ou sélectionnez les équipes cibles
+              %br
+              Le message sera envoyé en votre nom à tous les agents faisant partie des équipes.
+
+            = form_with url: broadcasts_path, remote: true do |f|
+              .modal-body
+                .row
+                  .col-6
+                    .form-group
+                      = f.label :target, 'Cible'
+                      = f.select :target, options_from_collection_for_select(@teams, :id, :name), { include_blank: "Tous" }, { class: 'form-control', multiple: true }
+                    .form-group
+                      = f.label :message, 'Message'
+                      = f.text_area :message, class: 'form-control'
+              .modal-footer.justify-content-between
+                = f.submit 'Enregistrer', class: 'btn btn-primary'

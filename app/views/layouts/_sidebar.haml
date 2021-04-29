@@ -31,6 +31,11 @@
               = link_to rooms_path, class: 'nav-link' do
                 %i.far.fa-comments.nav-icon
                 %p Discussions
+          - if policy(Room).index?
+            %li.nav-item
+              = link_to broadcasts_path, class: 'nav-link' do
+                %i.fas.fa-bullhorn.nav-icon
+                %p Multi-diffusion
           %li.nav-header Administration
           - if policy(Agent).index?
             %li.nav-item

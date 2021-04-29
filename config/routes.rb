@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :room_messages, only: %i[create destroy]
   resources :room_users, only: %i[create new]
-  resources :rooms, only: %i[index show new create] do
+  resources :rooms, only: %i[index show new create destroy] do
     post :purge, on: :member
   end
   resources :agents
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :users do
     post :reset_password, on: :member
   end
+  resources :broadcasts, only: %i[index create]
 
   namespace :public do
     resources :agents, only: %i[show]

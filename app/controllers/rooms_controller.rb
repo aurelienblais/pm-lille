@@ -35,6 +35,12 @@ class RoomsController < ApplicationController
     end
   end
 
+  def destroy
+    authorize item
+    item.destroy
+    render 'ajax/destroy'
+  end
+
   private
 
   def room_params
