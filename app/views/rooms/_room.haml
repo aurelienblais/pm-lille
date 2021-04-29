@@ -7,5 +7,9 @@
     .btn-group
       = link_to room, class: 'btn btn-default btn-sm' do
         %i.fas.fa-eye
-      = link_to purge_room_path(room), method: :post, remote: true, class: 'btn btn-danger btn-sm', data: { confirm: "Voulez-vous purger tous les messages ?" } do
-        %i.fas.fa-trash
+      - if policy(Room).purge?
+        = link_to purge_room_path(room), method: :post, remote: true, class: 'btn btn-danger btn-sm', data: { confirm: "Voulez-vous purger tous les messages ?" } do
+          %i.fas.fa-recycle
+      - if policy(Room).destroy? && room.agent_id.blank? && room.id != ENV.fetch('DEFAULT_ROOM_ID', 1)
+        = link_to room, method: :delete, remote: true, class: 'btn btn-danger btn-sm', data: { confirm: 'Voulez-vous vraiment supprimer cette salle ?' } do
+          %i.fas.fa-trash

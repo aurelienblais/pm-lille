@@ -39,4 +39,8 @@ class RoomPolicy < ApplicationPolicy
   def purge?
     user.superadmin? || user.admin?
   end
+
+  def destroy?
+    purge?
+  end
 end
