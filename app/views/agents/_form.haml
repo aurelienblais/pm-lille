@@ -26,10 +26,10 @@
           = f.date_field :departure_date, class: 'form-control'
         .form-group
           = f.label :team_id, 'Equipe'
-          = f.select :team_id, options_from_collection_for_select(@teams, :id, :name, :id), {}, { class: 'form-control select2' }
+          = f.select :team_id, options_from_collection_for_select(@teams, :id, :name, item.team_id), {}, { class: 'form-control select2' }
         .form-group
           = f.label :rank_id, 'Grade'
-          = f.select :rank_id, options_from_collection_for_select(Rank.order_by_name, :id, :name, :id), {}, { class: 'form-control select2' }
+          = f.select :rank_id, options_from_collection_for_select(Rank.order_by_name, :id, :name, item.rank_id), {}, { class: 'form-control select2' }
         - if item.persisted?
           = f.label :token do
             Token
