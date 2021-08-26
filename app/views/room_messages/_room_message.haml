@@ -2,6 +2,9 @@
   .direct-chat-infos.clearfix
     %span.direct-chat-name.float-left
       = room_message.get_user.complete_name
+      - if current_user && room_message.room.agent.present?
+        = link_to room_message.room.agent, target: '_blank', class: 'btn btn-default btn-sm' do
+          %i.fas.fa-eye
       - if policy(room_message).destroy?
         = link_to room_message, method: :delete, remote: true, data: { confirm: "Voulez-vous supprimer ce message ?" } do
           ×
