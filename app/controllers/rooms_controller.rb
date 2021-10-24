@@ -9,7 +9,7 @@ class RoomsController < ApplicationController
   def show
     authorize item
     @room_message = RoomMessage.new room: item
-    @room_messages = policy_scope(RoomMessage).includes(:user).where(room: item)
+    @room_messages = policy_scope(RoomMessage).includes(:user).order_by_created_at.where(room: item)
   end
 
   def new
