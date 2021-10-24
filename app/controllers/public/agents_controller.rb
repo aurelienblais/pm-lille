@@ -29,7 +29,7 @@ module Public
                        .where(agent: @team_agents)
                        .within_range(@month_range)
 
-      @room = Room.find_or_create_by!(agent: @agent, name: @agent.complete_name).order_by_last_message
+      @room = Room.find_or_create_by!(agent: @agent, name: @agent.complete_name)
     end
   end
 end
