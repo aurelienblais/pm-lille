@@ -5,7 +5,7 @@
       .col-xl-4.col-sm-12
         .card
           .card-body
-            .direct-chat-messages{ data: { channel_subscribe: :room, room_id: @room.id } }= render partial: 'room_messages/room_message', collection: @room.room_messages
+            .direct-chat-messages{ data: { channel_subscribe: :room, room_id: @room.id } }= render partial: 'room_messages/room_message', collection: @room.room_messages.order_by_created_at
           .card-footer
             = form_for RoomMessage.new(room: @room), remote: true do |f|
               .input-group
