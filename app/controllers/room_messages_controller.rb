@@ -16,6 +16,14 @@ class RoomMessagesController < ApplicationController
       RoomNotificationsChannel.broadcast_to room_user.user, item
     end
 
+    if item.room.agent.present? && item.user.present?
+      AgentMailer.with(agent: item.room.agent, message: item).message_notification.deliver_later
+    else
+      item.room.users.select { |user| user != item.user }.each do |user|
+        UserMailer.with(user: user, message: item).message_notification.deliver_later
+      end
+    end
+
     render 'room_messages/create'
   end
 

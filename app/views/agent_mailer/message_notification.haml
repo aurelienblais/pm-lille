@@ -1,0 +1,19 @@
+%h1
+  Bonjour
+  %b= @agent.complete_name
+
+%p
+  Vous avez reçu un nouveau message de
+  %b= @message.get_user.complete_name
+
+%p{ style: 'margin-top: 15px; border: 1px solid #eeeeee; background-color: #fcfcfc; padding: 10px; text-indent: 10px; text-align: justify' }
+  = @message.message
+
+%table{ border: 0, cellpadding: 0, cellspacing: 0, role: "presentation", style: 'margin-top: 30px;' }
+  %tr
+    %td{ style: 'width: 30%' }
+    %td.content-block
+      .btn.btn-primary.align-center
+        = link_to public_agent_url(@agent.token), target: '_blank', class: 'btn btn-default btn-sm' do
+          %span Consulter ma page
+    %td{ style: 'width: 30%' }

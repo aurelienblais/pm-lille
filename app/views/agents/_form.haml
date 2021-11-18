@@ -17,6 +17,9 @@
         .form-group
           = f.label :leave_balance, 'Solde de congés annuel'
           = f.number_field :leave_balance, class: 'form-control', required: true
+        .form-group
+          = f.label :email, 'E-mail'
+          = f.email_field :email, class: 'form-control'
       .col-6
         .form-group
           = f.label :arrival_date, 'Date d\'arrivée'

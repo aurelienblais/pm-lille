@@ -1,7 +1,7 @@
 %table.text-center.absences-table.w-100.table-highlight
   %thead
     %tr
-      %th.align-middle.agent-name.fit-text= agents.first.team
+      %th.align-middle.agent-name.fit-text= agents.first&.team
       - date_range.each do |date|
         %th
           = date.day

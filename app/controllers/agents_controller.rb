@@ -73,7 +73,8 @@ class AgentsController < ApplicationController
       :team_id,
       :rank_id,
       :leave_balance,
-      :token
+      :token,
+      :email
     )
   end
 end
