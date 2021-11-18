@@ -17,10 +17,10 @@ class RoomMessagesController < ApplicationController
     end
 
     if item.room.agent.present? && item.user.present?
-      AgentMailer.with(agent: item.room.agent, message: item).message_notification.deliver_later
+      AgentMailer.with(agent: item.room.agent, message: item).message_notification.deliver_now!
     else
       item.room.users.select { |user| user != item.user }.each do |user|
-        UserMailer.with(user: user, message: item).message_notification.deliver_later
+        UserMailer.with(user: user, message: item).message_notification.deliver_now!
       end
     end
 
