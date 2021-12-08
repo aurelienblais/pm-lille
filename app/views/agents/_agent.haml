@@ -8,6 +8,7 @@
       = "(#{agent.age} ans)"
   %td= agent.team
   %td= agent.rank
+  %td= agent.compensatory_rests.sum(&:amount)
   %td
     .btn-group
       = link_to agent, class: 'btn btn-info btn-sm' do

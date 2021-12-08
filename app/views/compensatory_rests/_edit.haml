@@ -1,0 +1,8 @@
+.modal#edit-modal
+  .modal-dialog.modal-xl
+    .modal-content
+      .modal-header
+        %h4.modal-title Modifier un repos compensatoire
+        %button.close{type: :button, data: { dismiss: :modal }}
+          %span ×
+      = render 'form'

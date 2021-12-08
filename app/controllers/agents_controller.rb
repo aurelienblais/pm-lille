@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AgentsController < ApplicationController
-  expose :items, -> { policy_scope(Agent).eager_load(:team, :rank).order_by_name.page params[:page] }
+  expose :items, -> { policy_scope(Agent).eager_load(:team, :rank, :compensatory_rests).order_by_name.page params[:page] }
   expose :item, model: Agent, build_params: :agent_params
 
   def index; end
@@ -32,6 +32,8 @@ class AgentsController < ApplicationController
 
     @leave_taken = item.leave_balance_for_range @date_range
     @leave_outstanding = item.leave_balance_for_range @last_year_range
+
+    @compensatory_rests = CompensatoryRest.eager_load(:agent).where(agent: item).page params[:page]
 
     @absence_types = AbsenceType.order_by_name
   end

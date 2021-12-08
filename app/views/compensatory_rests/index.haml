@@ -1,0 +1,21 @@
+%section.content-header
+%section.content
+  .container-fluid
+    .row
+      .col-12
+        .card
+          .card-header
+            %h3.card-title Repos Compensatoires
+            .card-tools
+              = link_to new_compensatory_rest_path, remote: true, class: 'btn btn-sm btn-secondary' do
+                Nouveau repos compensatoire
+          .card-body
+            %table.table.table-bordered.table-hover.text-center
+              %thead
+                %tr
+                  %th #
+                  %th Agent
+                  %th Raison
+                  %th Durée
+                  %th
+              %tbody#items-table= render items

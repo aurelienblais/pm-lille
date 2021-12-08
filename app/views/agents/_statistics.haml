@@ -37,3 +37,26 @@
                 Solde disponible
                 %i.fas.fa-info-circle{ data: { toggle: :tooltip }, title: 'Cette valeur est indicative et peux ne pas réfléter la réalité.' }
               %th= agent.leave_balance - @leave_taken + (agent.leave_balance - @leave_outstanding)
+    .card
+      .card-header
+        %h3.card-title Repos compensatoires
+      .card-body
+        %table.table.table-bordered.text-center
+          %thead
+            %tr
+              %th Raison
+              %th Durée
+          %tbody
+            - @compensatory_rests.each do |compensatory_rest|
+              %tr
+                %td= display_date compensatory_rest.created_at
+                %td= compensatory_rest.reason
+                %td= compensatory_rest.amount
+          %tfoot.bg-secondary
+            %tr
+              %td.text-bold{ colspan: 2 }
+                Solde disponible
+                %i.fas.fa-info-circle{ data: { toggle: :tooltip }, title: 'Cette valeur est indicative et peux ne pas réfléter la réalité.' }
+              %td.text-bold= agent.compensatory_rests.sum(&:amount)
+        = paginate @compensatory_rests
+

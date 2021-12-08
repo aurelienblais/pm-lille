@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :absence_types
   resources :absences, only: %i[index create]
   resources :recurring_absences
+  resources :compensatory_rests
   resources :users do
     post :reset_password, on: :member
   end

@@ -1,0 +1,13 @@
+%tr{ data: { item_id: compensatory_rest.id } }
+  %td= compensatory_rest.id
+  %td= compensatory_rest.agent.complete_name
+  %td= compensatory_rest.reason
+  %td
+    = compensatory_rest.amount
+    heures
+  %td
+    .btn-group
+      = link_to edit_compensatory_rest_path(compensatory_rest), remote: true, class: 'btn btn-default btn-sm'do
+        %i.fas.fa-edit
+      = link_to compensatory_rest, method: :delete, remote: true, class: 'btn btn-danger btn-sm', data: { confirm: 'Voulez-vous vraiment TOTALEMENT supprimer ce RC ?' } do
+        %i.fas.fa-trash

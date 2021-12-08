@@ -29,6 +29,8 @@ module Public
                        .where(agent: @team_agents)
                        .within_range(@month_range)
 
+      @compensatory_rests = CompensatoryRest.eager_load(:agent).where(agent: @agent).page params[:page]
+
       @room = Room.find_or_create_by!(agent: @agent, name: @agent.complete_name)
     end
   end

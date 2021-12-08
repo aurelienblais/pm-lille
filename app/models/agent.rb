@@ -3,7 +3,9 @@
 class Agent < ApplicationRecord
   belongs_to :team
   belongs_to :rank
+
   has_many :absences, dependent: :delete_all
+  has_many :compensatory_rests, dependent: :delete_all
 
   before_save :generate_token
 

@@ -4,8 +4,8 @@
     %span.brand-text.font-weight-light
       %b PM
       Lille
-  .slimScrollDiv{:style => "position: relative; overflow: hidden; width: auto; height: 652px;"}
-    .sidebar{:style => "min-height: 652px; overflow: hidden; width: auto; height: 652px;"}
+  .slimScrollDiv{ style: "position: relative; overflow: hidden; width: auto; height: 652px;" }
+    .sidebar{ style: "min-height: 652px; overflow: hidden; width: auto; height: 652px;" }
       .user-panel.mt-3.pb-3.mb-3.d-flex
         .info
           = link_to edit_registration_path(current_user), class: 'd-block' do
@@ -14,51 +14,16 @@
             %i.fas.fa-cog
       %nav.mt-2
         %ul.nav.nav-sidebar.flex-column
-          %li.nav-item
-            = link_to root_path, class: 'nav-link' do
-              %i.fas.fa-chart-line.nav-icon
-              %p Accueil
-          %li.nav-item
-            = link_to absences_path, class: 'nav-link' do
-              %i.far.fa-calendar.nav-icon
-              %p Calendrier
-          %li.nav-item
-            = link_to recurring_absences_path, class: 'nav-link' do
-              %i.fas.fa-stopwatch.nav-icon
-              %p Absences récurrentes
-          - if policy(Room).index?
-            %li.nav-item
-              = link_to rooms_path, class: 'nav-link' do
-                %i.far.fa-comments.nav-icon
-                %p Discussions
-          - if policy(Room).index?
-            %li.nav-item
-              = link_to broadcasts_path, class: 'nav-link' do
-                %i.fas.fa-bullhorn.nav-icon
-                %p Multi-diffusion
+          = menu_link(url: root_path, icon: 'fas fa-chart-line', content: "Accueil", controller: "dashboard")
+          = menu_link(url: absences_path, icon: 'far fa-calendar', content: "Calendrier", controller: "absences")
+          = menu_link(url: recurring_absences_path, icon: 'fas fa-stopwatch', content: "Absences récurrentes", controller: "recurring_absences")
+          = menu_link(url: compensatory_rests_path, icon: 'fas fa-bed', content: "RC", controller: "compensatory_rests")
+          = menu_link(url: rooms_path, icon: 'far fa-comments', content: "Discussions", model: "Room", policy_method: :index?, controller: "rooms")
+          = menu_link(url: broadcasts_path, icon: 'fas fa-bullhorn', content: "Multi-diffusion", model: "Room", policy_method: :index?, controller: "broadcasts")
+
           %li.nav-header Administration
-          - if policy(Agent).index?
-            %li.nav-item
-              = link_to agents_path, class: 'nav-link' do
-                %i.far.fa-user.nav-icon
-                %p Agents
-          - if policy(Team).index?
-            %li.nav-item
-              = link_to teams_path, class: 'nav-link' do
-                %i.fas.fa-sitemap.nav-icon
-                %p Equipes
-          - if policy(Rank).index?
-            %li.nav-item
-              = link_to ranks_path, class: 'nav-link' do
-                %i.fas.fa-medal.nav-icon
-                %p Grades
-          - if policy(AbsenceType).index?
-            %li.nav-item
-              = link_to absence_types_path, class: 'nav-link' do
-                %i.fas.fa-map-signs.nav-icon
-                %p Types d'absences
-          - if policy(User).index?
-            %li.nav-item
-              = link_to users_path, class: 'nav-link' do
-                %i.fas.fa-users.nav-icon
-                %p Utilisateurs
+          = menu_link(url: agents_path, icon: 'far fa-user', content: "Agents", model: "Agent", policy_method: :index?, controller: "agents")
+          = menu_link(url: teams_path, icon: 'fas fa-sitemap', content: "Equipes", model: "Team", policy_method: :index?, controller: "teams")
+          = menu_link(url: ranks_path, icon: 'fas fa-medal', content: "Grades", model: "Rank", policy_method: :index?, controller: "ranks")
+          = menu_link(url: absence_types_path, icon: 'fas fa-map-signs', content: "Types d'absences", model: "AbsenceType", policy_method: :index?, controller: "absence_types")
+          = menu_link(url: users_path, icon: 'fas fa-users', content: "Utilisateurs", model: "User", policy_method: :index?, controller: "users")

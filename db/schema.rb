@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_18_200659) do
+ActiveRecord::Schema.define(version: 2021_12_08_210558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,15 @@ ActiveRecord::Schema.define(version: 2021_11_18_200659) do
     t.string "email"
     t.index ["rank_id"], name: "index_agents_on_rank_id"
     t.index ["team_id"], name: "index_agents_on_team_id"
+  end
+
+  create_table "compensatory_rests", force: :cascade do |t|
+    t.bigint "agent_id"
+    t.string "reason"
+    t.integer "amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["agent_id"], name: "index_compensatory_rests_on_agent_id"
   end
 
   create_table "ranks", force: :cascade do |t|
