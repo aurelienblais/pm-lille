@@ -9,7 +9,7 @@
           = f.label :reason, 'Raison'
           = f.text_field :reason, class: 'form-control'
         .form-group
-          = f.label :amount, 'Durée (en heures)'
+          = f.label :amount, 'Durée en heures (positive pour créditer, négative pour débiter)'
           = f.number_field :amount, class: 'form-control', step: 0.25
   .modal-footer.justify-content-between
     = f.submit 'Enregistrer', class: 'btn btn-primary'
