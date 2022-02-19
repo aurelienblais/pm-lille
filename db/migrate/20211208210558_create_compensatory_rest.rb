@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCompensatoryRest < ActiveRecord::Migration[6.0]
   def change
     create_table :compensatory_rests do |t|

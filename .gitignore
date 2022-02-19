@@ -43,3 +43,5 @@ rubocop.html
 /.idea
 
 .DS_Store
+
+coverage

@@ -37,8 +37,8 @@ class Agent < ApplicationRecord
   def age
     return unless birthday
 
-    age = Date.today.year - birthday.year
-    age -= 1 if Date.today < birthday + age.years
+    age = Time.zone.today.year - birthday.year
+    age -= 1 if Time.zone.today < birthday + age.years
     age
   end
 

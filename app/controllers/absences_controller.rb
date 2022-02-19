@@ -8,8 +8,8 @@ class AbsencesController < ApplicationController
       dates = params[:dates].split(' - ')
       @date_range = Date.parse(dates[0])..Date.parse(dates[1])
     else
-      @current_date = Date.today
-      @date_range = @current_date.beginning_of_month..@current_date.end_of_month
+      @current_date = Time.zone.today
+      @date_range = @current_date.all_month
     end
 
     @agents = policy_scope(Agent).eager_load(:team).merge(Team.order_by_name).order_by_name.present_in_range(@date_range)
@@ -18,9 +18,9 @@ class AbsencesController < ApplicationController
     @absences = Absence.eager_load(:agent, :absence_type).where(agent: @agents).within_range(@date_range)
     @holidays = Holidays.between(@date_range.first, @date_range.last, :fr)
     @recurring_absences = RecurringAbsence
-                          .eager_load(:agent, :absence_type)
-                          .where(agent: @agents)
-                          .flat_map { |ra| ra.for_range(@date_range) }.compact
+      .eager_load(:agent, :absence_type)
+      .where(agent: @agents)
+      .flat_map { |ra| ra.for_range(@date_range) }.compact
 
     @absence_types = AbsenceType.order_by_name
     @teams = policy_scope(Team).order_by_name

@@ -10,12 +10,10 @@ module ApplicationHelper
   end
 
   def menu_link(url:, icon:, content:, controller: nil, model: nil, policy_method: nil)
-    if model.present? && policy_method.present?
-      return unless policy(model.constantize).public_send(policy_method)
-    end
+    return if model.present? && policy_method.present? && !policy(model.constantize).public_send(policy_method)
 
-    tag.li class: "nav-item" do
-      link_to url, class: "nav-link #{controller_name == controller ? "active" : ""}" do
+    tag.li class: 'nav-item' do
+      link_to url, class: "nav-link #{controller_name == controller ? 'active' : ''}" do
         out = capture { tag.i class: "#{icon} nav-icon" }
         out << capture { tag.p " #{content}" }
       end

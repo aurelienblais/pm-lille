@@ -15,14 +15,14 @@ class RoomMessage < ApplicationRecord
 
     if room.agent.present?
       OpenStruct.new({
-                       complete_name: room.agent.complete_name,
-                       gravatar_url: ActionController::Base.helpers.asset_path('agent.jpg')
-                     })
+        complete_name: room.agent.complete_name,
+        gravatar_url: ActionController::Base.helpers.asset_path('agent.jpg')
+      })
     else
       OpenStruct.new({
-                       complete_name: 'Système',
-                       gravatar_url: ActionController::Base.helpers.asset_path('logo.jpg')
-                     })
+        complete_name: 'Système',
+        gravatar_url: ActionController::Base.helpers.asset_path('logo.jpg')
+      })
     end
   end
 

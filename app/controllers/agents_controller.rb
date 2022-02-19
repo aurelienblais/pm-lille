@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class AgentsController < ApplicationController
-  expose :items, -> { policy_scope(Agent).eager_load(:team, :rank, :compensatory_rests).order_by_name.page params[:page] }
+  expose :items, lambda {
+                   policy_scope(Agent).eager_load(:team, :rank, :compensatory_rests).order_by_name.page params[:page]
+                 }
   expose :item, model: Agent, build_params: :agent_params
 
   def index; end
@@ -14,21 +16,21 @@ class AgentsController < ApplicationController
 
   def show
     authorize item
-    @current_date = params[:year] ? Date.parse("01-01-#{params[:year]}") : Date.today
+    @current_date = params[:year] ? Date.parse("01-01-#{params[:year]}") : Time.zone.today
 
-    @date_range = @current_date.beginning_of_year..@current_date.end_of_year
+    @date_range = @current_date.all_year
     @last_year_range = (@date_range.first - 1.year).beginning_of_year..(@date_range.last - 1.year).end_of_year
 
     @absences = Absence
-                .eager_load(:agent, :absence_type)
-                .within_range(@date_range)
-                .where(agent: item)
+      .eager_load(:agent, :absence_type)
+      .within_range(@date_range)
+      .where(agent: item)
 
     @holidays = Holidays.between(@date_range.first, @date_range.last, :fr)
     @recurring_absences = RecurringAbsence
-                          .eager_load(:agent, :absence_type)
-                          .where(agent: item)
-                          .flat_map { |ra| ra.for_range(@date_range) }.compact
+      .eager_load(:agent, :absence_type)
+      .where(agent: item)
+      .flat_map { |ra| ra.for_range(@date_range) }.compact
 
     @leave_taken = item.leave_balance_for_range @date_range
     @leave_outstanding = item.leave_balance_for_range @last_year_range

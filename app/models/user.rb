@@ -2,7 +2,7 @@
 
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+    :recoverable, :rememberable, :validatable
 
   has_many :user_teams
   has_many :teams, through: :user_teams

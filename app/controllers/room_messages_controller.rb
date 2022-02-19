@@ -19,7 +19,7 @@ class RoomMessagesController < ApplicationController
     if item.room.agent.present? && item.user.present?
       AgentMailer.with(agent: item.room.agent, message: item).message_notification.deliver_now!
     else
-      item.room.users.select { |user| user != item.user }.each do |user|
+      item.room.users.reject { |user| user == item.user }.each do |user|
         UserMailer.with(user: user, message: item).message_notification.deliver_now!
       end
     end

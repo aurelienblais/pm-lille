@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     resources :agents, only: %i[show]
   end
 
-  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
   root 'dashboard#index'
 end

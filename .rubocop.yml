@@ -1,7 +1,50 @@
 require:
   - rubocop-rails
   - rubocop-performance
+  - rubocop-rspec
 
 AllCops:
-  NewCops: enable
-  DefaultFormatter: html
+  Exclude:
+    - vendor/**/*
+    - node_modules/**/*
+    - tmp/**/*
+  NewCops: disable
+
+Metrics/BlockLength:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Layout/SpaceInsideArrayLiteralBrackets:
+  EnforcedStyle: no_space
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/MessageSpies:
+  Enabled: false
+
+RSpec/VerifiedDoubles:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false

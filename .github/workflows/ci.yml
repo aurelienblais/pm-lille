@@ -1,0 +1,92 @@
+name: ci
+on: [push]
+
+jobs:
+  setup:
+    name: Setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.18.1
+      - name: Find yarn cache location
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: JS package cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install packages
+        run: |
+          yarn install --pure-lockfile
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:10
+        env:
+          POSTGRES_USER: myapp
+          POSTGRES_DB: pm_lille_test
+          POSTGRES_PASSWORD: "myp@ssword"
+        ports: ["5432:5432"]
+      redis:
+        image: redis:alpine
+        ports: ["6379:6379"]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.18.1
+      - name: Find yarn cache location
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: JS package cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install packages
+        run: |
+          yarn install --pure-lockfile
+
+      - name: Setup test database
+        env:
+          RAILS_ENV: test
+          DATABASE_USERNAME: myapp
+          DATABASE_HOST: localhost
+          DATABASE_PASSWORD: "myp@ssword"
+        run: |
+          bin/rails db:setup
+
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+          DATABASE_USERNAME: myapp
+          DATABASE_HOST: localhost
+          DATABASE_PASSWORD: "myp@ssword"
+        run: bundle exec rspec

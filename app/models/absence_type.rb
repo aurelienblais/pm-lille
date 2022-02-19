@@ -9,6 +9,8 @@ class AbsenceType < ApplicationRecord
 
   TEXTURES = ['', 'texture-chevron', 'texture-honey', 'texture-striped', 'texture-striped-reverse'].freeze
 
+  validates :texture, inclusion: { in: TEXTURES }
+
   def to_s
     name
   end
