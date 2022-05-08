@@ -3,7 +3,7 @@
   %td= compensatory_rest.agent.complete_name
   %td= compensatory_rest.reason
   %td
-    = compensatory_rest.amount
+    = compensatory_rest.amount.to_f.round(2)
     heures
   %td
     .btn-group
