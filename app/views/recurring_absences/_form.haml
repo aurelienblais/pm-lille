@@ -4,7 +4,7 @@
       .col-12
         .form-group
           = f.label :agent_id, 'Agent'
-          = f.select :agent_id, options_from_collection_for_select(@agents, :id, :complete_name), {}, { class: 'form-control select2' }
+          = f.select :agent_id, options_from_collection_for_select(@agents, :id, :complete_name, item.agent_id), { include_blank: true }, { class: 'form-control select2', required: true }
         .form-group
           = f.label :absence_type_id, 'Type d\'absence'
           = f.select :absence_type_id, options_from_collection_for_select(@absence_types, :id, :name), {}, { class: 'form-control select2' }
