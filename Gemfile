@@ -28,7 +28,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'database_cleaner-active_record'
-  gem 'factory_bot_rails', '~> 5.0'
+  gem 'factory_bot_rails', '~> 6.0'
   gem 'letter_opener'
   gem 'letter_opener_web', '~> 2.0'
   gem 'rspec-rails', '~> 5.1.0'
