@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:10
+        image: postgres:12
         env:
           POSTGRES_USER: myapp
           POSTGRES_DB: pm_lille_test
