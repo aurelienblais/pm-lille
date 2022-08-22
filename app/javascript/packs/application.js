@@ -20,7 +20,9 @@ window.moment = moment;
 require("bootstrap");
 require("admin-lte");
 require('moment');
-require('chart.js');
+import Chart from 'chart.js/auto';
+global.Chart = Chart;
+window.Chart = Chart;
 require('select2');
 
 

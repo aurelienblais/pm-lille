@@ -11,7 +11,7 @@ class DashboardController < ApplicationController
       .page(params[:page])
       .per(5)
 
-    @last_messages = policy_scope(RoomMessage).eager_load(:user).latest(10)
+    @last_messages = policy_scope(RoomMessage).eager_load(:user, room: :agent).latest(10)
 
     @month_absences = policy_scope(Absence)
       .eager_load(:absence_type)
