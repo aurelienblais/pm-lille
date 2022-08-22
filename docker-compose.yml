@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   postgres:
-    image: postgres:10.0
+    image: postgres:10.21
     container_name: pm-lille_postgres
     ports:
       - "5432:5432"
