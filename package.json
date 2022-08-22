@@ -7,7 +7,7 @@
     "@rails/ujs": "6.1.5",
     "@rails/webpacker": "5.2.1",
     "admin-lte": "3.2.0",
-    "bootstrap": "4.6.1",
+    "bootstrap": "4.6.2",
     "bootstrap-colorpicker": "3.4.0",
     "bootstrap-datepicker": "1.9.0",
     "bootstrap-daterangepicker": "3.1.0",
