@@ -14,7 +14,7 @@ class Agent < ApplicationRecord
   scope :birthdays_in_next_days, lambda { |days|
                                    where("to_char(birthday, 'mmdd') in(?)", days.times.map do |i|
                                                                               (Date.current + i.days).strftime('%m%d')
-                                                                            end).order("to_char(birthday, 'mmdd') ASC")
+                                                                            end).order(Arel.sql("to_char(birthday, 'mmdd') ASC"))
                                  }
   scope :present_in_range, lambda { |range|
     arrival_date_in_range(range).departure_date_in_range(range)
