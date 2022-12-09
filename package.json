@@ -2,9 +2,9 @@
   "name": "pm_lille",
   "private": true,
   "dependencies": {
-    "@rails/actioncable": "7.0.2",
-    "@rails/activestorage": "7.0.2",
-    "@rails/ujs": "7.0.2",
+    "@rails/actioncable": "7.0.4",
+    "@rails/activestorage": "7.0.4",
+    "@rails/ujs": "7.0.4",
     "@rails/webpacker": "5.4.3",
     "admin-lte": "3.2.0",
     "bootstrap": "4.6.2",
@@ -13,18 +13,18 @@
     "bootstrap-daterangepicker": "3.1.0",
     "chart.js": "3.9.1",
     "fittxt": "1.0.1",
-    "jquery": "3.6.1",
+    "jquery": "3.6.0",
     "moment": "2.29.4",
-    "on-change": "4.0.1",
+    "on-change": "4.0.2",
     "popper.js": "1.16.1",
     "turbolinks": "5.2.0"
   },
   "version": "0.1.0",
   "devDependencies": {
-    "webpack-dev-server": "4.11.1"
+    "webpack-dev-server": "^3"
   },
   "engines": {
-    "node": "14.x",
+    "node": "18.x",
     "yarn": "1.x"
   }
 }

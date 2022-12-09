@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.6'
+ruby '2.7.7'
 
 gem 'dotenv-rails'
 
@@ -17,7 +17,7 @@ gem 'premailer-rails'
 gem 'puma', '~> 5.0'
 gem 'pundit'
 gem 'rails', '~> 6.1'
-gem 'redis'
+gem 'redis', '< 5'
 gem 'sass-rails', '>= 6'
 gem 'sidekiq'
 gem 'turbolinks', '~> 5'
