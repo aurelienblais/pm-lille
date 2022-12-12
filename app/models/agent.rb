@@ -12,7 +12,7 @@ class Agent < ApplicationRecord
   scope :order_by_name, -> { order(:last_name).order(:first_name) }
   scope :belong_to_team, ->(team) { where(team_id: team) }
   scope :birthdays_in_next_days, lambda { |days|
-                                   where("to_char(birthday, 'mmdd') in(?)", days.times.map do |i|
+                                   where("to_char(birthday, 'mmdd') in(?)", Array.new(days) do |i|
                                                                               (Date.current + i.days).strftime('%m%d')
                                                                             end).order(Arel.sql("to_char(birthday, 'mmdd') ASC"))
                                  }
