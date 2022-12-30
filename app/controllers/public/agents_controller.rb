@@ -15,6 +15,11 @@ module Public
         .eager_load(:agent, :absence_type)
         .within_range(@date_range)
         .where(agent: @agent)
+        .or(Absence
+              .eager_load(:agent, :absence_type)
+              .within_range(@month_range)
+              .where(agent: @agent)
+        ).uniq.compact
 
       @holidays = Holidays.between(@date_range.first, @date_range.last, :fr)
       @absence_types = AbsenceType.order_by_name
