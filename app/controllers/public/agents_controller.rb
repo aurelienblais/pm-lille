@@ -31,11 +31,11 @@ module Public
       @team_absences = Absence
         .eager_load(:agent, :absence_type)
         .where(agent: @team_agents)
-        .within_range(@month_range).to_a.concat(
+        .within_range(@month_range).map(&:to_json).concat(
         RecurringAbsence
           .eager_load(:agent, :absence_type)
           .where(agent: @team_agents)
-          .flat_map { |ra| ra.for_range(@month_range) }.to_a
+          .flat_map { |ra| ra.for_range(@month_range) }
       ).uniq.compact
 
       @compensatory_rests = CompensatoryRest.eager_load(:agent).where(agent: @agent).page params[:page]
