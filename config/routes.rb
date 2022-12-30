@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations'
@@ -24,6 +26,10 @@ Rails.application.routes.draw do
 
   namespace :public do
     resources :agents, only: %i[show]
+  end
+
+  authenticate :user, lambda { |u| u.superadmin? } do
+    mount Sidekiq::Web => '/sidekiq'
   end
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
