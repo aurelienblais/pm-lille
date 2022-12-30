@@ -43,8 +43,6 @@ $(document).on('turbolinks:load', () => {
 
         RECURRING_ABSENCES.forEach(x => {
             x = JSON.parse(x);
-            console.log(absences);
-            console.log(x.date);
            if (absences.includes(x.date))
                total[x.absence_type.id] = total[x.absence_type.id] - 1;
         });
