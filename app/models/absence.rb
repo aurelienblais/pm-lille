@@ -10,8 +10,8 @@ class Absence < ApplicationRecord
 
   def to_json(*_args)
     {
-      agent_id: agent_id,
-      date: date,
+      agent_id:,
+      date:,
       absence_type: absence_type.to_hash,
       recurring: false
     }.to_json

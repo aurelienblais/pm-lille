@@ -18,8 +18,7 @@ module Public
         .or(Absence
               .eager_load(:agent, :absence_type)
               .within_range(@month_range)
-              .where(agent: @agent)
-        ).uniq.compact
+              .where(agent: @agent)).uniq.compact
 
       @holidays = Holidays.between(@date_range.first, @date_range.last, :fr)
       @absence_types = AbsenceType.order_by_name
@@ -32,7 +31,12 @@ module Public
       @team_absences = Absence
         .eager_load(:agent, :absence_type)
         .where(agent: @team_agents)
-        .within_range(@month_range)
+        .within_range(@month_range).to_a.concat(
+        RecurringAbsence
+          .eager_load(:agent, :absence_type)
+          .where(agent: @team_agents)
+          .within_range(@month_range).to_a
+      ).uniq.compact
 
       @compensatory_rests = CompensatoryRest.eager_load(:agent).where(agent: @agent).page params[:page]
 

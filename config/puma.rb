@@ -9,13 +9,13 @@ port ENV.fetch('PORT', 3000)
 environment ENV.fetch('RAILS_ENV', 'development')
 pidfile ENV.fetch('PIDFILE', 'tmp/pids/server.pid')
 
-workers ENV.fetch("WEB_CONCURRENCY") { 2 }
+workers ENV.fetch('WEB_CONCURRENCY', 2)
 
 preload_app!
 
 if ENV.fetch('RAILS_ENV', 'development') == 'production'
-  before_fork do 
-      @sidekiq_pid ||= spawn('bundle exec sidekiq -t 25')
+  before_fork do
+    @sidekiq_pid ||= spawn('bundle exec sidekiq -t 25')
   end
 
   on_worker_boot do
@@ -23,7 +23,7 @@ if ENV.fetch('RAILS_ENV', 'development') == 'production'
   end
 
   on_restart do
-    Sidekiq.redis.shutdown { |conn| conn.close }
+    Sidekiq.redis.shutdown(&:close)
   end
 end
 

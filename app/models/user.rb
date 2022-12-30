@@ -47,7 +47,7 @@ class User < ApplicationRecord
 
     agents = teams.flat_map(&:agents)
     Room.where(agent: agents).find_each do |room|
-      RoomUser.create!(room: room, user: self)
+      RoomUser.create!(room:, user: self)
     end
   end
 end

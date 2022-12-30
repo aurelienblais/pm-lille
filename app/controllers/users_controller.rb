@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     item.user_teams.destroy_all
 
     team_ids.each do |team_id|
-      UserTeam.create(user: item, team_id: team_id)
+      UserTeam.create(user: item, team_id:)
     end
 
     item.update! user_params

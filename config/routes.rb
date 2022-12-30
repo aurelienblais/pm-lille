@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     resources :agents, only: %i[show]
   end
 
-  authenticate :user, lambda { |u| u.superadmin? } do
+  authenticate :user, ->(u) { u.superadmin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
 

@@ -26,7 +26,7 @@ FactoryBot.define do
       end
 
       after(:create) do |user, evaluator|
-        UserTeam.create(user: user, team: evaluator.team)
+        UserTeam.create(user:, team: evaluator.team)
       end
     end
   end

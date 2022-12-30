@@ -4,8 +4,8 @@ class RoomMessage < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :room, inverse_of: :room_messages
 
-  scope :for_user, ->(user) { includes(room: { room_users: :user }).where(room: { room_users: { user: user } }) }
-  scope :for_room, ->(room_id) { where(room_id: room_id) }
+  scope :for_user, ->(user) { includes(room: { room_users: :user }).where(room: { room_users: { user: } }) }
+  scope :for_room, ->(room_id) { where(room_id:) }
   scope :latest, ->(count) { order(created_at: :asc).last(count) }
   scope :order_by_created_at, -> { order(created_at: :asc) }
   scope :without_system, -> { where.not(user_id: nil) }

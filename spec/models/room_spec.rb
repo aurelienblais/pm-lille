@@ -25,7 +25,7 @@ RSpec.describe Room, type: :model do
 
   describe '#invite_users' do
     context 'when room belongs to an agent' do
-      subject { create(:room, agent: agent) }
+      subject { create(:room, agent:) }
 
       let(:agent) { create(:agent) }
       let!(:user) { create(:user, :with_team, team: agent.team) }

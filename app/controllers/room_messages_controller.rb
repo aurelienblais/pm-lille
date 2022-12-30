@@ -20,7 +20,7 @@ class RoomMessagesController < ApplicationController
       AgentMailer.with(agent: item.room.agent, message: item).message_notification.deliver_now!
     else
       item.room.users.reject { |user| user == item.user }.each do |user|
-        UserMailer.with(user: user, message: item).message_notification.deliver_now!
+        UserMailer.with(user:, message: item).message_notification.deliver_now!
       end
     end
 

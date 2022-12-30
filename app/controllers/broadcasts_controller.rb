@@ -16,7 +16,7 @@ class BroadcastsController < ApplicationController
               end
 
     Room.where(agent_id: targets.flat_map(&:agents).map(&:id)).each do |room|
-      item = RoomMessage.create!(room: room, user: current_user, message: params['message'])
+      item = RoomMessage.create!(room:, user: current_user, message: params['message'])
       AgentMailer.with(agent: room.agent, message: item).message_notification.deliver_now!
     end
 

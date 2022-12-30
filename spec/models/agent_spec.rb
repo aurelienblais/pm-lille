@@ -76,7 +76,7 @@ RSpec.describe Agent, type: :model do
     context 'when absences should decrease leave_balance' do
       let(:range) { Date.new(2021, 0o1, 0o1)..Date.new(2021, 12, 31) }
       let(:absence_type) { create(:absence_type, leave_balance: 1) }
-      let!(:absence) { create(:absence, agent: subject, date: Date.new(2021, 0o6, 0o6), absence_type: absence_type) }
+      let!(:absence) { create(:absence, agent: subject, date: Date.new(2021, 0o6, 0o6), absence_type:) }
 
       it 'returns updated leave_balance' do
         expect(subject.leave_balance_for_range(range)).to eq 1

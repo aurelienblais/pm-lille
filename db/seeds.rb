@@ -11,5 +11,5 @@
 default_room = Room.create(name: 'Général')
 
 User.find_each do |user|
-  RoomUser.create(user: user, room: default_room)
+  RoomUser.create(user:, room: default_room)
 end

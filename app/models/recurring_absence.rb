@@ -15,9 +15,9 @@ class RecurringAbsence < ApplicationRecord
                 end
     start_date.step(stop_date, periodicity).flat_map do |date|
       {
-        agent_id: agent_id,
+        agent_id:,
         absence_type: absence_type.to_hash,
-        date: date,
+        date:,
         recurring: true
       }.to_json
     end

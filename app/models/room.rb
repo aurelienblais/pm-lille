@@ -9,7 +9,7 @@ class Room < ApplicationRecord
 
   scope :order_by_name, -> { order(:name) }
   scope :order_by_last_message, -> { includes(:room_messages).order('room_messages.created_at desc') }
-  scope :for_user, ->(user) { includes(room_users: :user).where(room_users: { user: user }) }
+  scope :for_user, ->(user) { includes(room_users: :user).where(room_users: { user: }) }
 
   after_create :create_system_message
   after_create :invite_users
@@ -27,7 +27,7 @@ class Room < ApplicationRecord
     return if agent.blank?
 
     User.eager_load(:teams).select { |user| user.teams.include?(agent.team) }.each do |user|
-      RoomUser.create!(room: self, user: user)
+      RoomUser.create!(room: self, user:)
     end
   end
 end
