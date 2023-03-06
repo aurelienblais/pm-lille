@@ -37,7 +37,7 @@ class AgentsController < ApplicationController
 
     @compensatory_rests = CompensatoryRest.eager_load(:agent).where(agent: item).page params[:page]
 
-    @absence_types = AbsenceType.order_by_name
+    @absence_types = AbsenceType.visible.order_by_name
   end
 
   def create

@@ -44,7 +44,8 @@ class AbsenceTypesController < ApplicationController
       :color,
       :leave_balance,
       :texture,
-      :display_statistic
+      :display_statistic,
+      :status
     )
   end
 end

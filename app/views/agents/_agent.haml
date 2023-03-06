@@ -19,5 +19,5 @@
         %i.fas.fa-edit
       = link_to public_agent_path(agent.token), target: '_blank', class: 'btn btn-default btn-sm' do
         %i.fas.fa-external-link-alt
-      = link_to agent, method: :delete, remote: true, class: 'btn btn-danger btn-sm', data: { confirm: 'Voulez-vous vraiment supprimer cet agent ?' } do
-        %i.fas.fa-trash
+      -# = link_to agent, method: :delete, remote: true, class: 'btn btn-danger btn-sm', data: { confirm: 'Voulez-vous vraiment supprimer cet agent ?' } do
+      -#   %i.fas.fa-trash

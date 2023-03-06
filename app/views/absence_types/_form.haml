@@ -17,9 +17,18 @@
             %label.btn.btn-success.active
               Oui
               = f.radio_button :display_statistic, true
-            %label.btn.btn-error
+            %label.btn.btn-danger
               Non
               = f.radio_button :display_statistic, false
+        .form-group
+          = f.label :status, 'Afficher dans les sélecteurs'
+          .btn-group.btn-group-toggle{ data: { toggle: :buttons } }
+            %label.btn.btn-success.active
+              Oui
+              = f.radio_button :status, :visible
+            %label.btn.btn-danger
+              Non
+              = f.radio_button :status, :hidden
         .form-group
           = f.label :texture, 'Texture'
           - AbsenceType::TEXTURES.each do |selector|

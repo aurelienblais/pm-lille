@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_221_212_212_351) do
+ActiveRecord::Schema.define(version: 20_230_306_214_541) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20_221_212_212_351) do
     t.decimal 'leave_balance', default: '0.0'
     t.string 'texture'
     t.boolean 'display_statistic', default: true
+    t.string 'status', default: 'visible'
   end
 
   create_table 'absences', force: :cascade do |t|

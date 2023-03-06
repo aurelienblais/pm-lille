@@ -4,9 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable
 
-  has_many :user_teams
+  has_many :user_teams, dependent: :destroy
   has_many :teams, through: :user_teams
-  has_many :room_users
+  has_many :room_users, dependent: :destroy
   has_many :rooms, through: :room_users
 
   scope :order_by_name, -> { order(:first_name).order(:last_name) }

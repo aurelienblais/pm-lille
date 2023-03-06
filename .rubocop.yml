@@ -8,6 +8,7 @@ AllCops:
     - vendor/**/*
     - node_modules/**/*
     - tmp/**/*
+    - db/**/*
   NewCops: disable
 
 Metrics/BlockLength:
@@ -47,4 +48,10 @@ RSpec/VerifiedDoubles:
   Enabled: false
 
 Style/Documentation:
+  Enabled: false
+
+RSpec/LetSetup:
+  Enabled: false
+
+RSpec/NestedGroups:
   Enabled: false

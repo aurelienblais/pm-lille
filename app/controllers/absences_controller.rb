@@ -22,7 +22,7 @@ class AbsencesController < ApplicationController
       .where(agent: @agents)
       .flat_map { |ra| ra.for_range(@date_range) }.compact
 
-    @absence_types = AbsenceType.order_by_name
+    @absence_types = AbsenceType.visible.order_by_name
     @teams = policy_scope(Team).order_by_name
   end
 
