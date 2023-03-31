@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 class AgentsController < ApplicationController
-  expose :items, lambda {
-                   policy_scope(Agent).eager_load(:team, :rank, :compensatory_rests).order_by_name.page params[:page]
-                 }
   expose :item, model: Agent, build_params: :agent_params
 
-  def index; end
+  def index
+    @agents = policy_scope(Agent)
+                .eager_load(:team, :rank, :compensatory_rests)
+                .order_by_name
+                .page params[:page]
+  end
 
   def new
     authorize item

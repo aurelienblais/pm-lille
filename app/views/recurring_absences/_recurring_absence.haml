@@ -1,6 +1,6 @@
 %tr{ data: { item_id: recurring_absence.id } }
   %td= recurring_absence.id
-  %td= recurring_absence.agent.complete_name
+  %td= recurring_absence.agent&.complete_name
   %td
     .color-display{ style: "background-color: #{recurring_absence.absence_type.color}", class: recurring_absence.absence_type.texture }
     = recurring_absence.absence_type.name
