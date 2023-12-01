@@ -6,7 +6,7 @@ class RecurringAbsence < ApplicationRecord
   scope :within_range, ->(range) { where(date: range) }
 
   def for_range(range)
-    return nil if range.exclude?(start_date) && start_date > range.first
+    return [] if range.exclude?(start_date) && start_date > range.first
 
     stop_date = if end_date.nil?
                   range.last
