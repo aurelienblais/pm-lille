@@ -17,7 +17,7 @@ gem 'premailer-rails'
 gem 'puma', '~> 6.0'
 gem 'pundit'
 gem 'rails', '~> 6.1'
-gem 'redis', '< 5' # ActionCable throws errors with Redis >= 5
+gem 'redis', '< 6' # ActionCable throws errors with Redis >= 5
 gem 'sass-rails', '>= 6'
 gem 'sidekiq'
 gem 'turbolinks', '~> 5'
