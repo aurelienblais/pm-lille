@@ -7,8 +7,12 @@
           .card-header
             %h3.card-title Agents
             .card-tools
-              -# = link_to agents_path(show_all: true), class: 'btn btn-sm btn-primary mr-2' do
-              -#   Voir tous les agents
+              - if params[:show_all]
+                = link_to agents_path, class: 'btn btn-sm btn-primary mr-2' do
+                  Voir uniquement les agents actifs
+              - else
+                = link_to agents_path(show_all: true), class: 'btn btn-sm btn-primary mr-2' do
+                  Voir tous les agents
               = link_to new_agent_path, remote: true, class: 'btn btn-sm btn-secondary' do
                 Nouvel agent
           .card-body

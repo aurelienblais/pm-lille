@@ -7,7 +7,12 @@ class AgentsController < ApplicationController
     @agents = policy_scope(Agent)
                 .eager_load(:team, :rank, :compensatory_rests)
                 .order_by_name
-                .page params[:page]
+
+    unless params[:show_all]
+      @agents = @agents.present_in_range(7.days.ago .. 7.days.from_now)
+    end
+
+    @agents = @agents.page params[:page]
   end
 
   def new

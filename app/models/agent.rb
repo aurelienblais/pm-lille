@@ -54,6 +54,10 @@ class Agent < ApplicationRecord
       .reduce(0) { |sum, item| sum + item.absence_type.leave_balance.to_f }
   end
 
+  def active?
+    departure_date.nil? || departure_date > Time.now
+  end
+
   private
 
   def generate_token

@@ -1,4 +1,4 @@
-%tr{ data: { item_id: agent.id } }
+%tr{ data: { item_id: agent.id }, class: agent.active? ? '' : 'bg-warning' }
   %td= agent.id
   %td= agent.complete_name
   %td= agent.register_number
