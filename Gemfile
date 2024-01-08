@@ -14,7 +14,7 @@ gem 'holidays'
 gem 'kaminari'
 gem 'pg', '>= 0.18'
 gem 'premailer-rails'
-gem 'puma', '~> 6.0'
+gem 'puma', '~> 6.4'
 gem 'pundit'
 gem 'rails', '~> 6.1'
 gem 'redis', '< 5' # ActionCable throws errors with Redis >= 5
