@@ -19,6 +19,11 @@
           .card-header
             %h3.card-title Prévision des 25 prochains jours
           .card-body= render 'absences/team_table', agents: @team_agents, date_range: @month_range, display_link: false
+
+        .card
+          .card-header
+            %h3.card-title Prévision des 25 prochains jours
+          .card-body= render 'absences/team_table', agents: @special_agents, date_range: @month_range, display_link: false
     .row
       .col-xl-4.col-sm-12
         .row
