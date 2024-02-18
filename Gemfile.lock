@@ -358,7 +358,7 @@ DEPENDENCIES
   letter_opener_web (~> 2.0)
   pg (>= 0.18)
   premailer-rails
-  puma (~> 6.0)
+  puma (~> 6.4)
   pundit
   rails (~> 6.1)
   redis (< 5)
