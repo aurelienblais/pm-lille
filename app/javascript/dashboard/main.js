@@ -76,7 +76,7 @@ setEvent = (eventId, eventName, color, texture) => {
 }
 
 $(document).on('turbolinks:load', () => {
-    $('.dashboard-date').on('apply.daterangepicker changeDate', function (ev, picker) {
+    $('.dashboard-date').on('apply.daterangepicker', function (ev, picker) {
         $('.dashboard-form').submit();
     });
 

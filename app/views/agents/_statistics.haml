@@ -5,7 +5,7 @@
     - if display_nav
       .card-tools{ style: 'width: 15vw;' }
         = form_tag agent_url(agent), method: :get, class: 'dashboard-form' do
-          = text_field_tag :year, @date_range.first.year, class: 'form-control dashboard-date year-picker'
+          = select_tag :year, options_for_select(agent.arrival_date.year..Time.now.year, @current_date.year), class: 'form-control', onchange: 'this.form.submit()'
   .card-body
     .card
       .card-header

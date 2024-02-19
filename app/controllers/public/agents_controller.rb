@@ -28,7 +28,12 @@ module Public
         .flat_map { |ra| ra.for_range(@date_range) + ra.for_range(@month_range) }.uniq.compact
 
       @team_agents = @agent.team.agents.order_by_name.present_in_range(@month_range)
-      @special_agents = Team.find_by(id: ENV.fetch('SPECIAL_TEAM_ID', 11)).agents.order_by_name
+      special_team = Team.find_by(id: ENV.fetch('SPECIAL_TEAM_ID', 11))
+      if special_team.present?
+        @special_agents = special_team.agents.order_by_name
+      else
+        @special_agents = Agent.none
+      end
       @team_absences = Absence
         .eager_load(:agent, :absence_type)
         .where(agent: [@team_agents, @special_agents].flatten)
